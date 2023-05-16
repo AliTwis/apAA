@@ -16,7 +16,7 @@ public class Workshop extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = Workshop.class.getResource("/FXML/workshop.fxml");
+        URL url = Workshop.class.getResource("/fxml/workshop.fxml");
         try {
             BorderPane borderPane = FXMLLoader.load(url);
             Scene scene = new Scene(borderPane);
