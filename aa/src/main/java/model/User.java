@@ -17,9 +17,9 @@ public class User implements Comparable<User> {
     private static String backupData = "src/main/resources/users/backup.json";
     private String username;
     private String password;
-    private int score;
+    private String avatarAddress;
+    private int score = 0;
     private int[] lastUpdate = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
-
 
     public User(String username, String password) {
         this.username = username;
@@ -108,6 +108,14 @@ public class User implements Comparable<User> {
             if (users.get(i).equals(user)) return i + 1;
         }
         return -1;
+    }
+
+    public String getAvatarAddress() {
+        return avatarAddress;
+    }
+
+    public void setAvatarAddress(String avatarAddress) {
+        this.avatarAddress = avatarAddress;
     }
 
     public String getUsername() {

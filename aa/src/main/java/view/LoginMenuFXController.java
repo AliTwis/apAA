@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import model.User;
 
 import static controller.Enums.SuccessfulResponses.*;
 
@@ -14,7 +15,7 @@ public class LoginMenuFXController {
     public PasswordField password;
     private final LoginController loginController = new LoginController();
 
-    public void register(ActionEvent actionEvent) {
+    public void register(ActionEvent actionEvent) throws Exception {
         String response = loginController.register(username.getText(), password.getText());
         if (!response.equals(REGISTER.getOutput())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -23,7 +24,7 @@ public class LoginMenuFXController {
             alert.setContentText(response);
             alert.showAndWait();
         } else {
-
+            new AvatarMenu(User.getUserByName(username.getText())).start(LoginMenu.gameStage);
         }
     }
 
