@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +18,7 @@ import javafx.stage.Stage;
 import model.User;
 
 import java.io.File;
+import java.util.Random;
 
 public class AvatarMenu extends Application {
     User user;
@@ -29,6 +31,7 @@ public class AvatarMenu extends Application {
         File directory = new File("src/main/resources/images/avatars");
         VBox vBox = new VBox();
         Text text = new Text();
+        vBox.setAlignment(Pos.CENTER);
         text.setText("Hello " + user.getUsername() + " please choose your avatar:");
         vBox.getChildren().add(text);
         GridPane gridPane = FXMLLoader.load(AvatarMenu.class.getResource("/fxml/avatar.fxml"));
@@ -49,6 +52,21 @@ public class AvatarMenu extends Application {
             });
         }
         vBox.getChildren().add(gridPane);
+        Button randomAvatar = new Button();
+        randomAvatar.setText("random");
+        randomAvatar.setAlignment(Pos.CENTER);
+        randomAvatar.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                Random random = new Random();
+                int randomPic = random.nextInt(directory.listFiles().length);
+                ImageView imageView = (ImageView) gridPane.getChildren().get(randomPic);
+                user.setAvatarAddress(imageView.getImage().getUrl());
+                User.updateUsers();
+                stage.close();
+            }
+        });
+        vBox.getChildren().add(randomAvatar);
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
         stage.show();

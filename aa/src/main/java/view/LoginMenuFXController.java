@@ -1,11 +1,10 @@
 package view;
 
-import controller.LoginController;
+import controller.ProfileController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import model.User;
 
 import static controller.Enums.SuccessfulResponses.*;
@@ -13,10 +12,10 @@ import static controller.Enums.SuccessfulResponses.*;
 public class LoginMenuFXController {
     public TextField username;
     public PasswordField password;
-    private final LoginController loginController = new LoginController();
+    private final ProfileController profileController = new ProfileController();
 
     public void register(ActionEvent actionEvent) throws Exception {
-        String response = loginController.register(username.getText(), password.getText());
+        String response = profileController.register(username.getText(), password.getText());
         if (!response.equals(REGISTER.getOutput())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("DUMB!!!!!!!!!!!!");
@@ -29,7 +28,7 @@ public class LoginMenuFXController {
     }
 
     public void login(ActionEvent actionEvent) {
-        String response = loginController.login(username.getText(), password.getText());
+        String response = profileController.login(username.getText(), password.getText());
         if (!response.equals(LOGIN.getOutput())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("DUMB!!!!!!!!!!!!");
@@ -39,5 +38,8 @@ public class LoginMenuFXController {
         } else {
 
         }
+    }
+
+    public void enterAsGuest(ActionEvent actionEvent) {
     }
 }

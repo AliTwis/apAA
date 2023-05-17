@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -19,12 +21,13 @@ public class User implements Comparable<User> {
     private String password;
     private String avatarAddress;
     private int score = 0;
-    private int[] lastUpdate = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
+    private int[] lastUpdate = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
         users.add(this);
+        this.setTime();
     }
 
     public static User getUserByName(String name) {
@@ -32,6 +35,16 @@ public class User implements Comparable<User> {
             if (user.username.equals(name)) return user;
         }
         return null;
+    }
+
+    public void setTime() {
+        LocalDate localDate = java.time.LocalDate.now();
+        this.getLastUpdate()[0] = localDate.getYear();
+        this.getLastUpdate()[1] = localDate.getMonthValue();
+        this.getLastUpdate()[2] = localDate.getDayOfMonth();
+        LocalTime localTime = java.time.LocalTime.now();
+        this.getLastUpdate()[3] = localTime.getHour();
+        this.getLastUpdate()[4] = localTime.getMinute();
     }
 
     public static void updateUsers() {
@@ -95,7 +108,25 @@ public class User implements Comparable<User> {
 
         Type usersType = new TypeToken<ArrayList<User>>(){}.getType();
 
-        users = gson.fromJson(save, usersType);
+        ArrayList<User> tempUsers = gson.fromJson(save, usersType);
+        if (tempUsers != null) users = tempUsers;
+        else users = new ArrayList<>();
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int[] getLastUpdate() {
+        return lastUpdate;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setLastUpdate(int[] lastUpdate) {
+        this.lastUpdate = lastUpdate;
     }
 
     public static ArrayList<User> getUsers() {
@@ -137,7 +168,7 @@ public class User implements Comparable<User> {
     @Override
     public int compareTo(User o) {
         if (o.score != score) return o.score - score;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             if (o.lastUpdate[i] != lastUpdate[i]) {
                 return o.lastUpdate[i] - lastUpdate[i];
             }

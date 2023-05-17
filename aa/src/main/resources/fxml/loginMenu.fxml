@@ -17,6 +17,7 @@
             <HBox alignment="CENTER" spacing="2">
                 <Button text="login" onAction="#login"/>
                 <Button text="register" onAction="#register"/>
+                <Button text="Guest" onAction="#enterAsGuest"/>
             </HBox>
         </VBox>
     </center>
