@@ -5,6 +5,8 @@ public enum SuccessfulResponses {
     LOGIN("Successfully logged in."),
     CHANGE_USERNAME("Your username successfully changed."),
     CHANGE_PASSWORD("Your password successfully changed."),
+    GAME_FINISHED("You finished the game!"),
+    GAME_LOST("You lost:)"),
     ;
     private String output;
     SuccessfulResponses (String output) {

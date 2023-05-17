@@ -3,6 +3,7 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import view.GameMenu;
 
 import java.util.LinkedList;
 
@@ -45,6 +46,10 @@ public class TargetCircle extends Circle {
 
     public LinkedList<Ball> getBalls() {
         return balls;
+    }
+
+    public void addBall(Ball currentBall) {
+        balls.addLast(currentBall);
     }
 
     public void setBalls(LinkedList<Ball> balls) {

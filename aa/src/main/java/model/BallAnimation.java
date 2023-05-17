@@ -27,7 +27,7 @@ public class BallAnimation extends Transition {
         if (doesIntersect()) {
             ball.setConnectedAngle(centerBall.getCurrentAngle());
             this.stop();
-            centerBall.getBalls().addLast(ball);
+            centerBall.addBall(ball);
             ball.getLine().setVisible(true);
         }
     }

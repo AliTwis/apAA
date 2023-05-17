@@ -33,8 +33,6 @@ public class Ball extends Circle {
         this.getLine().setEndX(center.getCenterX());
         this.getLine().setEndY(center.getCenterY());
         line.setVisible(false);
-//        this.gameLayout = gameLayout;
-//        gameLayout.getChildren().add(line);
     }
 
     public Pane getGameLayout() {
