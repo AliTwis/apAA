@@ -48,7 +48,7 @@ public class ProfileController {
         return CHANGE_PASSWORD.getOutput();
     }
 
-    public ArrayList<String> showRankings() {
+    public static ArrayList<String> showRankings() {
         Collections.sort(User.getUsers());
         ArrayList<User> users = User.getUsers();
         ArrayList<String> outputs = new ArrayList<>();

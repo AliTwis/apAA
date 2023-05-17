@@ -10,12 +10,13 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.MainMenuFXController"
             prefHeight="400.0" prefWidth="600.0"
-            alignment="CENTER">
+            spacing="50"
+            alignment="TOP_RIGHT">
     <VBox alignment="CENTER" spacing="20">
         <Button text="new Game" maxWidth="170" minWidth="170"/>
-        <Button text="Scoreboard" maxWidth="170" minWidth="170"/>
+        <Button text="Scoreboard" maxWidth="170" minWidth="170" onAction="#showScoreboard"/>
         <Button text="Setting" maxWidth="170" minWidth="170"/>
-        <Button text="Exit" maxWidth="170" minWidth="170"/>
+        <Button text="Exit" maxWidth="170" minWidth="170" onAction="#exit"/>
     </VBox>
 
 </VBox>
