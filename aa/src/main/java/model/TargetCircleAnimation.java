@@ -17,7 +17,7 @@ public class TargetCircleAnimation extends Transition {
         targetCircle.setRotate((targetCircle.getCurrentAngle() + targetCircle.getRotationSpeed()) % 360);
         targetCircle.setCurrentAngle((targetCircle.getCurrentAngle() + targetCircle.getRotationSpeed()) % 360);
         for (Ball ball : targetCircle.getBalls()) {
-            ball.getNewRotate().setAngle(targetCircle.getCurrentAngle());
+            ball.getNewRotate().setAngle(targetCircle.getCurrentAngle() - ball.getConnectedAngle());
         }
     }
 }

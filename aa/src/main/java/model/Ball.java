@@ -19,7 +19,7 @@ public class Ball extends Circle {
 
     private Pane gameLayout;
 
-    public Ball(double v, double v1, double v2, int number, TargetCircle center, Pane gameLayout) {
+    public Ball(double v, double v1, double v2, int number, TargetCircle center) {
         super(v, v1, v2);
         this.number = number;
         this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
@@ -32,8 +32,9 @@ public class Ball extends Circle {
         this.getLine().setStartY(this.getCenterY());
         this.getLine().setEndX(center.getCenterX());
         this.getLine().setEndY(center.getCenterY());
-        this.gameLayout = gameLayout;
-        gameLayout.getChildren().add(line);
+        line.setVisible(false);
+//        this.gameLayout = gameLayout;
+//        gameLayout.getChildren().add(line);
     }
 
     public Pane getGameLayout() {
