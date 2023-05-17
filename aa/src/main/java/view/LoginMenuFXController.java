@@ -27,7 +27,7 @@ public class LoginMenuFXController {
         }
     }
 
-    public void login(ActionEvent actionEvent) {
+    public void login(ActionEvent actionEvent) throws Exception {
         String response = profileController.login(username.getText(), password.getText());
         if (!response.equals(LOGIN.getOutput())) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -36,7 +36,8 @@ public class LoginMenuFXController {
             alert.setContentText(response);
             alert.showAndWait();
         } else {
-
+            MainMenu mainMenu = new MainMenu(User.getUserByName(username.getText()));
+            mainMenu.start(LoginMenu.gameStage);
         }
     }
 
