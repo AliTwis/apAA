@@ -1,10 +1,12 @@
 package model;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 
 public class Ball extends Circle {
     private int connectedAngle = -1;
@@ -12,13 +14,38 @@ public class Ball extends Circle {
     private int xSpeed = 0;
     private int ySpeed = 10;
     private BallAnimation ballAnimation;
+    private Rotate rotate;
     private int number;
 
-    public Ball(double v, double v1, double v2, int number) {
+    private Pane gameLayout;
+
+    public Ball(double v, double v1, double v2, int number, TargetCircle center, Pane gameLayout) {
         super(v, v1, v2);
         this.number = number;
         this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
+        rotate = new Rotate();
+        rotate.setPivotX(center.getCenterX());
+        rotate.setPivotY(center.getCenterY());
+        this.getTransforms().add(rotate);
+        line.getTransforms().add(rotate);
+        this.getLine().setStartX(this.getCenterX());
+        this.getLine().setStartY(this.getCenterY());
+        this.getLine().setEndX(center.getCenterX());
+        this.getLine().setEndY(center.getCenterY());
+        this.gameLayout = gameLayout;
+        gameLayout.getChildren().add(line);
+    }
 
+    public Pane getGameLayout() {
+        return gameLayout;
+    }
+
+    public void setGameLayout(Pane gameLayout) {
+        this.gameLayout = gameLayout;
+    }
+
+    public Rotate getNewRotate() {
+        return rotate;
     }
 
     public int getConnectedAngle() {

@@ -20,7 +20,7 @@ public class GameMenu extends Application {
         stage.setHeight(700);
         Pane gameLayout = new Pane();
         TargetCircle targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 70);
-        Ball ball = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, 1);
+        Ball ball = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, 1, targetCircle, gameLayout);
         BallAnimation thisBallAnimation = new BallAnimation(ball, targetCircle);
         ball.setBallAnimation(thisBallAnimation);
         thisBallAnimation.play();
