@@ -3,10 +3,11 @@ package model;
 import javafx.animation.Transition;
 import javafx.util.Duration;
 
-public class TargetCircleAnimation extends Transition {
+public class TargetCircleAnimation extends GameTransitions {
     private TargetCircle targetCircle;
 
     public TargetCircleAnimation(TargetCircle targetCircle) {
+        super.addTransition(this);
         this.targetCircle = targetCircle;
         this.setCycleDuration(Duration.millis(10000));
         this.setCycleCount(10);

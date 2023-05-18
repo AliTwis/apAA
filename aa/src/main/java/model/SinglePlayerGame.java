@@ -24,7 +24,6 @@ public class SinglePlayerGame {
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle);
-            newBall.setBallAnimation(new BallAnimation(newBall, targetCircle));
             gameLayout.getChildren().add(newBall.getLine());
             player.getBalls().addLast(newBall);
         }
@@ -32,18 +31,7 @@ public class SinglePlayerGame {
         gameLayout.getChildren().addAll(targetCircle, player.getBalls().getFirst());
     }
 
-    public String shoot(Pane gameLayout) {
-        LinkedList<Ball> balls = player.getBalls();
-        Ball firstBall = balls.getFirst();
-        firstBall.getBallAnimation().play();
-        balls.removeFirst();
-        if (balls.size() > 0) {
-            balls.getFirst().getLine().setVisible(true);
-            gameLayout.getChildren().add(balls.getFirst());
-        }
-        else stage.close();
-        return "";
-    }
+
 
     public boolean checkCollision(Ball currentBall) {
         Shape intersect;

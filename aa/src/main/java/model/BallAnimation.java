@@ -1,15 +1,20 @@
 package model;
 
+import controller.GeneralGameController;
 import javafx.animation.Transition;
 import javafx.application.Application;
 import javafx.util.Duration;
 
-public class BallAnimation extends Transition {
+public class BallAnimation extends GameTransitions {
     private Ball ball;
     private TargetCircle centerBall;
     private double desiredDistance;
 
-    public BallAnimation(Ball ball, TargetCircle targetCircle) {
+    private GeneralGameController gameController;
+
+    public BallAnimation(Ball ball, TargetCircle targetCircle, GeneralGameController gameController) {
+        super.addTransition(this);
+        this.gameController = gameController;
         this.ball = ball;
         centerBall = targetCircle;
         this.setCycleDuration(Duration.millis(1000));
@@ -27,7 +32,7 @@ public class BallAnimation extends Transition {
         if (doesIntersect()) {
             ball.setConnectedAngle(centerBall.getCurrentAngle());
             this.stop();
-            centerBall.addBall(ball);
+            gameController.addBallToCenter(ball);
             ball.getLine().setVisible(true);
         }
     }
