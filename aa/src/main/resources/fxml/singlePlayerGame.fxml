@@ -22,5 +22,6 @@
       <Text layoutX="24.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Balls left:" />
       <Text fx:id="ballsAmount" layoutX="92.0" layoutY="148.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
       <Text layoutX="225.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="wind:" />
+      <Text fx:id="time" layoutX="123.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="time left" />
    </children>
 </Pane>

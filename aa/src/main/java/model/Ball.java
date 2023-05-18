@@ -9,7 +9,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
 public class Ball extends Circle {
-    private int connectedAngle = -1;
+    private double connectedAngle = -1;
     private Line line = new Line();
     private int xSpeed = 0;
     private int ySpeed = 10;
@@ -47,11 +47,11 @@ public class Ball extends Circle {
         return rotate;
     }
 
-    public int getConnectedAngle() {
+    public double getConnectedAngle() {
         return connectedAngle;
     }
 
-    public void setConnectedAngle(int connectedAngle) {
+    public void setConnectedAngle(double connectedAngle) {
         this.connectedAngle = connectedAngle;
     }
 

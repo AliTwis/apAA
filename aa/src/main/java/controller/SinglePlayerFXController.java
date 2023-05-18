@@ -19,7 +19,7 @@ public class SinglePlayerFXController implements Initializable {
     public ProgressBar ice;
 
     private int eachPoint = 10;
-    private double eachIceProgress = 10;
+    private double eachIceProgress = 0.5;
     private int ballsLeft;
 
 
@@ -45,7 +45,7 @@ public class SinglePlayerFXController implements Initializable {
     }
 
     public void setIceProgress(int iceProgress) {
-        score.setText(Integer.toString(iceProgress));
+        ice.setProgress(iceProgress);
     }
 
     public double getIceProgress() {
@@ -53,7 +53,7 @@ public class SinglePlayerFXController implements Initializable {
     }
 
     public void increaseIceProgress() {
-        ice.setProgress(ice.getProgress() + eachIceProgress);
+        ice.setProgress(Math.min(1, ice.getProgress() + eachIceProgress));
     }
 
     public void setBallsAmount(int number) {

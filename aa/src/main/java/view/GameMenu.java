@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -67,6 +68,11 @@ public class GameMenu extends Application {
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(KeyCode.SPACE)) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
+                }
+                else if (keyEvent.getCode().equals(KeyCode.TAB)) {
+                    if (gameController.getIceProgress() > 0.95) {
+                        generalGameController.freeze();
+                    }
                 }
             }
 
