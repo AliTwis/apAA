@@ -18,6 +18,7 @@ import java.util.LinkedList;
 public class GeneralGameController {
     GameMenu gameMenu;
     private boolean smallBall = true;
+    private boolean visible = true;
 
     public GeneralGameController(GameMenu gameMenu) {
         this.gameMenu = gameMenu;
@@ -47,11 +48,11 @@ public class GeneralGameController {
         int initial = gameMenu.getGame().getInitialBallsAmount();
         System.out.println(current);
         if (current == initial / 4) {
-            changeDirectionPhase1();
-            changeBallsSizePhase1();
+            changeDirectionPhase2();
+            changeBallsSizePhase2();
         }
         else if (current == initial / 2) {
-
+            changeVisibilityPhase3();
         }
         else if (current == (initial * 3) / 4) {
 
@@ -90,14 +91,20 @@ public class GeneralGameController {
         });
     }
 
-    private void changeDirectionPhase1() {
+    private void changeDirectionPhase2() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500), this::changeDirection));
         timeline.setCycleCount(-1);
         timeline.play();
     }
 
-    private void changeBallsSizePhase1() {
+    private void changeBallsSizePhase2() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), this::changeBallsSize));
+        timeline.setCycleCount(-1);
+        timeline.play();
+    }
+
+    private void changeVisibilityPhase3() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), this::changeVisibility));
         timeline.setCycleCount(-1);
         timeline.play();
     }
@@ -125,6 +132,23 @@ public class GeneralGameController {
     private void changeDirection(ActionEvent actionEvent) {
         TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
         targetCircle.setRotationSpeed(-targetCircle.getRotationSpeed());
+    }
+
+    private void changeVisibility(ActionEvent actionEvent) {
+        LinkedList<Ball> balls = gameMenu.getGame().getTargetCircle().getBalls();
+        if (visible) {
+            for (Ball ball : balls) {
+                ball.setVisible(false);
+                ball.getLine().setVisible(false);
+            }
+            visible = false;
+        } else {
+            for (Ball ball : balls) {
+                ball.setVisible(true);
+                ball.getLine().setVisible(true);
+            }
+            visible = true;
+        }
     }
 
     public void timing(ActionEvent actionEvent) {
