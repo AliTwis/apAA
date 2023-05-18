@@ -21,7 +21,9 @@ import java.util.LinkedList;
 
 public class GameMenu extends Application {
     private Stage gameStage;
-    private Pane gameLayout;
+    private Pane pauseLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/pause.fxml"));
+    private Pane gameLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));;
+    private Pane wholeLayout = new Pane();
     private Scene scene;
     private int level = 1;
     private int wind = 0;
@@ -32,7 +34,6 @@ public class GameMenu extends Application {
     private boolean paused = false;
     private boolean movable = false;
     private static SinglePlayerFXController gameController;
-    private Pane pauseLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/pause.fxml"));
 
     private GeneralGameController generalGameController = new GeneralGameController(this);
 
@@ -53,10 +54,10 @@ public class GameMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         gameStage = stage;
+        wholeLayout.getChildren().add(gameLayout);
         //initialize game
         stage.setWidth(450);
         stage.setHeight(700);
-        gameLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));
         gameController.setIceProgress(0);
         gameController.setUsername(username);
         gameController.setBallsAmount(ballsAmount);
@@ -67,7 +68,7 @@ public class GameMenu extends Application {
         for (Ball ball : game.getPlayer().getBalls()) {
             ball.setBallAnimation(new BallAnimation(ball, game.getTargetCircle(), generalGameController));
         }
-        scene = new Scene(gameLayout);
+        scene = new Scene(wholeLayout);
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
