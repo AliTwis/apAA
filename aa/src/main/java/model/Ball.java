@@ -36,6 +36,8 @@ public class Ball extends Circle {
         line.setVisible(false);
     }
 
+
+
     public boolean isSmallBall() {
         return smallBall;
     }

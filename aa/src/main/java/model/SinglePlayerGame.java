@@ -22,14 +22,13 @@ public class SinglePlayerGame {
         this.initialBallsAmount = ballsAmount;
         this.stage = stage;
         player = new Player(user);
-        targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 70);
+        targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 100);
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle);
             gameLayout.getChildren().add(newBall.getLine());
             player.getBalls().addLast(newBall);
         }
-        player.getBalls().getFirst().getLine().setVisible(true);
         gameLayout.getChildren().addAll(targetCircle, player.getBalls().getFirst());
     }
 

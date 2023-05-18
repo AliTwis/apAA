@@ -28,6 +28,7 @@ public class GameMenu extends Application {
     private String username = "ali";
     SinglePlayerGame game;
     private boolean paused = false;
+    private boolean movable = false;
     private static SinglePlayerFXController gameController;
 
     private GeneralGameController generalGameController = new GeneralGameController(this);
@@ -47,7 +48,7 @@ public class GameMenu extends Application {
     public void start(Stage stage) throws Exception {
         gameStage = stage;
         //initialize game
-        stage.setWidth(300);
+        stage.setWidth(450);
         stage.setHeight(700);
         gameLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));
         gameController.setIceProgress(0);
@@ -83,11 +84,27 @@ public class GameMenu extends Application {
                         paused = true;
                     }
                 }
+
+                else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
+                    generalGameController.moveLeft();
+                }
+
+                else if (keyEvent.getCode().equals(KeyCode.RIGHT) && movable) {
+                    generalGameController.moveRight();
+                }
             }
 
         });
         stage.setScene(scene);
         stage.show();
+    }
+
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
     }
 
     public Stage getGameStage() {
@@ -133,5 +150,9 @@ public class GameMenu extends Application {
         label.setStyle("-fx-background-color: 'white';");
         gameLayout.getChildren().add(label);
         //todo
+    }
+
+    public void win() {
+        gameLayout.setStyle("-fx-background-color: 'green';");
     }
 }

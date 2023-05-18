@@ -14,11 +14,13 @@ import model.TargetCircle;
 import view.GameMenu;
 
 import java.util.LinkedList;
+import java.util.Random;
 
 public class GeneralGameController {
     GameMenu gameMenu;
     private boolean smallBall = true;
     private boolean visible = true;
+    private boolean windActive = false;
 
     public GeneralGameController(GameMenu gameMenu) {
         this.gameMenu = gameMenu;
@@ -44,9 +46,14 @@ public class GeneralGameController {
 
     }
 
+    public void isOutOfGame(Ball ball) {
+        if (ball.getCenterY() < gameMenu.getGame().getTargetCircle().getCenterY() - 40) {
+            gameMenu.lose();
+        }
+    }
+
     public void checkPhase(int current) {
         int initial = gameMenu.getGame().getInitialBallsAmount();
-        System.out.println(current);
         if (current == initial / 4) {
             changeDirectionPhase2();
             changeBallsSizePhase2();
@@ -55,7 +62,8 @@ public class GeneralGameController {
             changeVisibilityPhase3();
         }
         else if (current == (initial * 3) / 4) {
-
+            gameMenu.setMovable(true);
+            windActive = true;
         }
     }
 
@@ -66,12 +74,19 @@ public class GeneralGameController {
         firstBall.getBallAnimation().play();
         balls.removeFirst();
         if (balls.size() > 0) {
-            balls.getFirst().getLine().setVisible(true);
             gameLayout.getChildren().add(balls.getFirst());
         } else {
+            gameMenu.win();
             //todo for finishing the game and winning
         }
         checkPhase(gameMenu.getGame().getCurrentBall());
+        if (windActive && balls.size() > 0) {
+            int wind = new Random().nextInt(60) - 30;
+            firstBall = balls.getFirst();
+            firstBall.setxSpeed((int)(10 * Math.sin(Math.toRadians(wind))));
+            System.out.println("wind: " + wind + " x: " + Math.sin(Math.toRadians(wind)));
+            GameMenu.getGameController().setWind(wind);
+        }
     }
 
     public void freeze() {
@@ -152,5 +167,15 @@ public class GeneralGameController {
     }
 
     public void timing(ActionEvent actionEvent) {
+    }
+
+    public void moveLeft() {
+        Ball ball = gameMenu.getGame().getPlayer().getBalls().getFirst();
+        if (ball.getCenterX() > 20) ball.setCenterX(ball.getCenterX() - 10);
+    }
+
+    public void moveRight() {
+        Ball ball = gameMenu.getGame().getPlayer().getBalls().getFirst();
+        if (ball.getCenterX() < gameMenu.getGameStage().getWidth() - 20) ball.setCenterX(ball.getCenterX() + 10);
     }
 }
