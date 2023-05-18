@@ -13,11 +13,13 @@ import java.util.LinkedList;
 public class SinglePlayerGame {
     private Player player;
     private Stage stage;
-    private Ball currentBall;
+    private int initialBallsAmount;
+    private int currentBall = 0;
     private TargetCircle targetCircle;
     private boolean finished = false;
 
     public SinglePlayerGame(User user, int ballsAmount, Stage stage, Pane gameLayout) {
+        this.initialBallsAmount = ballsAmount;
         this.stage = stage;
         player = new Player(user);
         targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 70);
@@ -45,6 +47,22 @@ public class SinglePlayerGame {
             }
         }
         return false;
+    }
+
+    public int getCurrentBall() {
+        return currentBall;
+    }
+
+    public void setCurrentBall(int currentBall) {
+        this.currentBall = currentBall;
+    }
+
+    public void increaseCurrentBall() {
+        this.currentBall++;
+    }
+
+    public int getInitialBallsAmount() {
+        return initialBallsAmount;
     }
 
     public Player getPlayer() {

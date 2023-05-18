@@ -16,6 +16,7 @@ public class Ball extends Circle {
     private BallAnimation ballAnimation;
     private Rotate rotate;
     private int number;
+    private boolean smallBall = true;
 
     private Pane gameLayout;
 
@@ -33,6 +34,14 @@ public class Ball extends Circle {
         this.getLine().setEndX(center.getCenterX());
         this.getLine().setEndY(center.getCenterY());
         line.setVisible(false);
+    }
+
+    public boolean isSmallBall() {
+        return smallBall;
+    }
+
+    public void setSmallBall(boolean smallBall) {
+        this.smallBall = smallBall;
     }
 
     public Pane getGameLayout() {

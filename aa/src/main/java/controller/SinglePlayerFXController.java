@@ -56,6 +56,10 @@ public class SinglePlayerFXController implements Initializable {
         ice.setProgress(Math.min(1, ice.getProgress() + eachIceProgress));
     }
 
+    public int getBallsLeft() {
+        return ballsLeft;
+    }
+
     public void setBallsAmount(int number) {
         ballsAmount.setText(Integer.toString(number));
         ballsLeft = number;
