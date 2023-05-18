@@ -14,10 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import model.Ball;
-import model.BallAnimation;
-import model.GameTransitions;
-import model.SinglePlayerGame;
+import model.*;
 
 import java.util.LinkedList;
 
@@ -30,6 +27,7 @@ public class GameMenu extends Application {
     private int ballsAmount = 10;
     private String username = "ali";
     SinglePlayerGame game;
+    private boolean paused = false;
     private static SinglePlayerFXController gameController;
 
     private GeneralGameController generalGameController = new GeneralGameController(this);
@@ -72,6 +70,17 @@ public class GameMenu extends Application {
                 else if (keyEvent.getCode().equals(KeyCode.TAB)) {
                     if (gameController.getIceProgress() > 0.95) {
                         generalGameController.freeze();
+                    }
+                }
+                else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+                    if (paused) {
+                        game.getTargetCircle().getAnimation().play();
+                        gameLayout.setOpacity(1);
+                        paused = false;
+                    } else {
+                        GameTransitions.stopTransitions();
+                        gameLayout.setOpacity(0.3);
+                        paused = true;
                     }
                 }
             }
@@ -118,9 +127,7 @@ public class GameMenu extends Application {
     }
 
     public void lose() {
-        for (Transition transition : GameTransitions.getTransitions()) {
-            transition.stop();
-        }
+        GameTransitions.stopTransitions();
         gameLayout.setStyle("-fx-background-color: 'red';");
         Label label = new Label("You lost!");
         label.setStyle("-fx-background-color: 'white';");

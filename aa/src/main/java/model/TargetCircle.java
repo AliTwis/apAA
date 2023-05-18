@@ -55,4 +55,8 @@ public class TargetCircle extends Circle {
     public void setBalls(LinkedList<Ball> balls) {
         this.balls = balls;
     }
+
+    public TargetCircleAnimation getAnimation() {
+        return animation;
+    }
 }

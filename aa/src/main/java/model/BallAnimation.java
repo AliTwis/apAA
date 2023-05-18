@@ -34,6 +34,7 @@ public class BallAnimation extends GameTransitions {
             this.stop();
             gameController.addBallToCenter(ball);
             ball.getLine().setVisible(true);
+            GameTransitions.getTransitions().remove(this);
         }
     }
 

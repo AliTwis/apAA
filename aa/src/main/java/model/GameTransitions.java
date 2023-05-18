@@ -14,4 +14,16 @@ public abstract class GameTransitions extends Transition{
     public static ArrayList<Transition> getTransitions() {
         return transitions;
     }
+
+    public static void stopTransitions() {
+        for (Transition transition : transitions) {
+            transition.stop();
+        }
+    }
+
+    public static void startTransitions() {
+        for (Transition transition : transitions) {
+            transition.play();
+        }
+    }
 }
