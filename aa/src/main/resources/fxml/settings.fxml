@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SettingsMenuFXController">
+   <children>
+      <Label alignment="CENTER" layoutX="25.0" layoutY="81.0" prefHeight="16.0" prefWidth="118.0" text="pick your level:" />
+      <RadioButton fx:id="level1" layoutX="181.0" layoutY="80.0" mnemonicParsing="false" text="level 1" textAlignment="CENTER">
+         <toggleGroup>
+            <ToggleGroup fx:id="level" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="level2" layoutX="300.0" layoutY="80.0" mnemonicParsing="false" selected="true" text="level 2" textAlignment="CENTER" toggleGroup="$level" />
+      <RadioButton fx:id="level3" layoutX="428.0" layoutY="80.0" mnemonicParsing="false" text="level 3" textAlignment="CENTER" toggleGroup="$level" />
+      <Label alignment="CENTER" layoutX="25.0" layoutY="143.0" prefHeight="16.0" prefWidth="118.0" text="how many balls?" />
+      <ChoiceBox fx:id="ballsAmount" layoutX="181.0" layoutY="139.0" prefHeight="16.0" prefWidth="35.0" />
+      <Label alignment="CENTER" layoutX="25.0" layoutY="200.0" prefHeight="16.0" prefWidth="118.0" text="first player shoot" />
+      <Label fx:id="freeze" alignment="CENTER" layoutX="25.0" layoutY="282.0" prefHeight="16.0" prefWidth="118.0" text="freeze" />
+      <Label alignment="CENTER" layoutX="25.0" layoutY="242.0" prefHeight="16.0" prefWidth="118.0" text="second player shoot" />
+      <ChoiceBox fx:id="firstShoot" layoutX="181.0" layoutY="196.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="secondShoot" layoutX="181.0" layoutY="238.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="ice" layoutX="181.0" layoutY="278.0" prefWidth="150.0" />
+      <Label alignment="CENTER" layoutX="255.0" layoutY="6.0" prefHeight="38.0" prefWidth="90.0" text="Settings" textAlignment="CENTER">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#back" text="Back">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Button>
+      <Circle fx:id="firstMonster" fill="DODGERBLUE" layoutX="209.0" layoutY="348.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" onMouseClicked="#chooseMonster1"/>
+      <Circle fx:id="secondMonster" fill="DODGERBLUE" layoutX="333.0" layoutY="348.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" onMouseClicked="#chooseMonster2" />
+      <Circle fx:id="thirdMonster" fill="DODGERBLUE" layoutX="461.0" layoutY="348.0" radius="28.0" stroke="BLACK" strokeType="INSIDE" onMouseClicked="#chooseMonster3" />
+      <Label alignment="CENTER" layoutX="25.0" layoutY="340.0" prefHeight="16.0" prefWidth="118.0" text="monster:" />
+   </children>
+</Pane>

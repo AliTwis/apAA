@@ -73,15 +73,15 @@ public class GameMenu extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
-                if (keyEvent.getCode().equals(KeyCode.SPACE)) {
+                if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
                 }
-                else if (keyEvent.getCode().equals(KeyCode.TAB)) {
+                else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
                     if (gameController.getIceProgress() > 0.95) {
                         generalGameController.freeze();
                     }
                 }
-                else if (keyEvent.getCode().equals(KeyCode.ESCAPE)) {
+                else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
                     if (paused) {
                         gameLayout.getChildren().remove(pauseLayout);
                         game.getTargetCircle().getAnimation().play();

@@ -16,7 +16,7 @@ public class TargetCircle extends Circle {
 
     public TargetCircle(double v, double v1, double v2) {
         super(v, v1, v2);
-        this.setFill(new ImagePattern(new Image(TargetCircle.class.getResource("/images/game/monster4.png").toExternalForm())));
+        this.setFill(new ImagePattern(new Image(Game.getTargetCircleImageAddress())));
         animation.play();
     }
 

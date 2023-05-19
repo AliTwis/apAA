@@ -12,10 +12,9 @@ import view.LoginMenu;
 
 import java.util.LinkedList;
 
-public class SinglePlayerGame {
+public class SinglePlayerGame extends Game{
     private Player player;
     private Stage stage;
-    private int initialBallsAmount;
     private int currentBall = 0;
     private TargetCircle targetCircle;
     private boolean finished = false;
@@ -38,19 +37,6 @@ public class SinglePlayerGame {
         gameLayout.getChildren().addAll(targetCircle, player.getBalls().getFirst());
     }
 
-
-
-    public boolean checkCollision(Ball currentBall) {
-        Shape intersect;
-        for (Ball ball : targetCircle.getBalls()) {
-            if (!ball.equals(currentBall)) {
-                int distance = (int)(Math.abs(targetCircle.getCurrentAngle() - ball.getConnectedAngle())) % 360;
-                if (distance < 30) return true;
-            }
-        }
-        return false;
-    }
-
     public int getCurrentBall() {
         return currentBall;
     }
@@ -61,10 +47,6 @@ public class SinglePlayerGame {
 
     public void increaseCurrentBall() {
         this.currentBall++;
-    }
-
-    public int getInitialBallsAmount() {
-        return initialBallsAmount;
     }
 
     public Player getPlayer() {

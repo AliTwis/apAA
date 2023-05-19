@@ -13,7 +13,7 @@
     <VBox alignment="CENTER" spacing="20">
         <Button alignment="CENTER" maxWidth="170" minWidth="170" text="new Game" />
         <Button alignment="CENTER" maxWidth="170" minWidth="170" onAction="#showScoreboard" text="Scoreboard" />
-        <Button alignment="CENTER" maxWidth="170" minWidth="170" text="Setting" />
+        <Button alignment="CENTER" maxWidth="170" minWidth="170" text="Setting" onAction="#showSettings" />
         <Button alignment="CENTER" maxWidth="170" minWidth="170" onAction="#exit" text="Exit" />
     </VBox>
 
