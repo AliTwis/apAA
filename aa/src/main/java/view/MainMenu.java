@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class MainMenu extends Application {
-    static User user;
+    public static User user;
 
     public MainMenu(User user) {
         this.user = user;

@@ -17,6 +17,7 @@ public class SinglePlayerFXController implements Initializable {
     public Text wind;
     public Text ballsAmount;
     public ProgressBar ice;
+    public Text time;
 
     private int eachPoint = 10;
     private double eachIceProgress = 0.5;
@@ -76,5 +77,9 @@ public class SinglePlayerFXController implements Initializable {
 
     public void setWind(int windString) {
         wind.setText(Integer.toString(windString));
+    }
+
+    public void setTime(String timeString) {
+        time.setText(timeString);
     }
 }

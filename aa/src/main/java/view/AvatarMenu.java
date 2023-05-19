@@ -47,7 +47,11 @@ public class AvatarMenu extends Application {
                 public void handle(MouseEvent mouseEvent) {
                     user.setAvatarAddress(imageView.getImage().getUrl());
                     User.updateUsers();
-                    stage.close();
+                    try {
+                        new MainMenu(user).start(LoginMenu.gameStage);
+                    } catch (Exception e) {
+                        System.out.println("There was a problem with choosing the avatar.");;
+                    }
                 }
             });
         }
@@ -63,7 +67,11 @@ public class AvatarMenu extends Application {
                 ImageView imageView = (ImageView) gridPane.getChildren().get(randomPic);
                 user.setAvatarAddress(imageView.getImage().getUrl());
                 User.updateUsers();
-                stage.close();
+                try {
+                    new MainMenu(user).start(LoginMenu.gameStage);
+                } catch (Exception e) {
+                    System.out.println("There was a problem with choosing the avatar.");;
+                }
             }
         });
         vBox.getChildren().add(randomAvatar);

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 
 public class TargetCircle extends Circle {
     private double currentAngle = 0;
-    private double rotationSpeed = 1;
+    private double rotationSpeed = 2.4;//easy:1.8 medium:2.4 hard:3
     private TargetCircleAnimation animation = new TargetCircleAnimation(this);
     private LinkedList<Ball> balls = new LinkedList<>();
     private String imageAddress = "/images/game/monster4.png";

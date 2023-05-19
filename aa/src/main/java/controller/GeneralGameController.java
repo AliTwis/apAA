@@ -13,6 +13,7 @@ import model.Player;
 import model.TargetCircle;
 import view.GameMenu;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
 
@@ -21,6 +22,9 @@ public class GeneralGameController {
     private boolean smallBall = true;
     private boolean visible = true;
     private boolean windActive = false;
+    private int minute = 1;
+    private int second = 5;
+    private HashMap<String, Timeline> timelines = new HashMap<>();
 
     public GeneralGameController(GameMenu gameMenu) {
         this.gameMenu = gameMenu;
@@ -110,18 +114,21 @@ public class GeneralGameController {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500), this::changeDirection));
         timeline.setCycleCount(-1);
         timeline.play();
+        timelines.put("change direction", timeline);
     }
 
     private void changeBallsSizePhase2() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), this::changeBallsSize));
         timeline.setCycleCount(-1);
         timeline.play();
+        timelines.put("change ball size", timeline);
     }
 
     private void changeVisibilityPhase3() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), this::changeVisibility));
         timeline.setCycleCount(-1);
         timeline.play();
+        timelines.put("change visibility", timeline);
     }
 
     private void changeBallsSize(ActionEvent actionEvent) {
@@ -177,5 +184,27 @@ public class GeneralGameController {
     public void moveRight() {
         Ball ball = gameMenu.getGame().getPlayer().getBalls().getFirst();
         if (ball.getCenterX() < gameMenu.getGameStage().getWidth() - 20) ball.setCenterX(ball.getCenterX() + 10);
+    }
+
+    public void addTimer() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), this::passTime));
+        timeline.setCycleCount(-1);
+        timeline.play();
+        timelines.put("timer", timeline);
+    }
+
+    private void passTime(ActionEvent actionEvent) {
+        if (second > 0) second--;
+        else if (second == 0 && minute > 0) {
+            second = 59;
+            minute--;
+        }
+        else {
+            gameMenu.lose();
+            Timeline timeline = timelines.get("timer");
+            timeline.stop();
+            timelines.remove("timer");
+        }
+        GameMenu.getGameController().setTime(minute + ":" + second);
     }
 }

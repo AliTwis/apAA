@@ -36,7 +36,7 @@ public class ProfileController {
     }
 
     public String changeUsername(String username, User user) {
-        if (!checkUsername(username)) return "Bad username!";
+        if (!checkUsername(username) || username.length() == 0) return "Bad username!";
         if (User.getUserByName(username) != null) return "There is a user with this username";
         user.setUsername(username);
         return CHANGE_USERNAME.getOutput();

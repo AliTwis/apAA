@@ -4,6 +4,8 @@ import javafx.animation.Animation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 import view.LoginMenu;
@@ -26,6 +28,10 @@ public class SinglePlayerGame {
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle);
+            //setting colors
+            if (i < ballsAmount / 2) newBall.setFill(Color.MEDIUMVIOLETRED);
+            else if (ballsAmount - i <= 2) newBall.setFill(Color.GREEN);
+            else newBall.setFill(Color.YELLOW);
             gameLayout.getChildren().add(newBall.getLine());
             player.getBalls().addLast(newBall);
         }
@@ -37,12 +43,9 @@ public class SinglePlayerGame {
     public boolean checkCollision(Ball currentBall) {
         Shape intersect;
         for (Ball ball : targetCircle.getBalls()) {
-//            if (!ball.equals(currentBall) && ball.getBoundsInParent().intersects(currentBall.getBoundsInParent())) return true;
             if (!ball.equals(currentBall)) {
                 int distance = (int)(Math.abs(targetCircle.getCurrentAngle() - ball.getConnectedAngle())) % 360;
                 if (distance < 30) return true;
-//                intersect = Shape.intersect(ball, currentBall);
-//                if (intersect.getBoundsInParent().getWidth() > 0) return true;
             }
         }
         return false;

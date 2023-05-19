@@ -58,6 +58,7 @@ public class GameMenu extends Application {
         //initialize game
         stage.setWidth(450);
         stage.setHeight(700);
+        generalGameController.addTimer();
         gameController.setIceProgress(0);
         gameController.setUsername(username);
         gameController.setBallsAmount(ballsAmount);
@@ -127,7 +128,6 @@ public class GameMenu extends Application {
         GameTransitions.stopTransitions();
         gameLayout.setStyle("-fx-background-color: 'red';");
         Label label = new Label("You lost!");
-        label.setStyle("-fx-background-color: 'white';");
         gameLayout.getChildren().add(label);
         //todo
     }

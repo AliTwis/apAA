@@ -47,4 +47,8 @@ public class MainMenuFXController {
     public void exit(ActionEvent actionEvent) {
         LoginMenu.gameStage.close();
     }
+
+    public void showProfileMenu(ActionEvent actionEvent) throws Exception {
+        new ProfileMenu().start(LoginMenu.gameStage);
+    }
 }
