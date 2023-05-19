@@ -26,6 +26,8 @@ public class MainMenu extends Application {
         URL url = MainMenu.class.getResource("/fxml/mainMenu.fxml");
         VBox vBox = FXMLLoader.load(url);
         Scene scene = new Scene(vBox);
+        stage.setWidth(600);
+        stage.setHeight(400);
         stage.setScene(scene);
         stage.show();
     }

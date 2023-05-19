@@ -58,7 +58,7 @@ public class ProfileController {
             int[] lastUpdate = user.getLastUpdate();
             outputs.add((i + 1) + "." + user.getUsername() + ", score: " + user.getScore() + ", last game: " +
                     "date: " + lastUpdate[0] + "/" + lastUpdate[1] + "/" + lastUpdate[2] +
-                    " time: " + lastUpdate[2] + ":" + lastUpdate[3]);
+                    " time: " + lastUpdate[3] + ":" + lastUpdate[4]);
         }
 
         return outputs;

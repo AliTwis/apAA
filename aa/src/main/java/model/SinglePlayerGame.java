@@ -19,11 +19,12 @@ public class SinglePlayerGame extends Game{
     private TargetCircle targetCircle;
     private boolean finished = false;
 
-    public SinglePlayerGame(User user, int ballsAmount, Stage stage, Pane gameLayout) {
+    public SinglePlayerGame(User user, int ballsAmount, Stage stage, Pane gameLayout, Level level) {
         this.initialBallsAmount = ballsAmount;
         this.stage = stage;
         player = new Player(user);
         targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 100);
+        targetCircle.setRotationSpeed(level.getRotationSpeed());
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle);

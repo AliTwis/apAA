@@ -27,8 +27,11 @@ public class MainMenuFXController {
     private User user;
 
     public void showScoreboard(ActionEvent actionEvent) {
+        LoginMenu.gameStage.setHeight(400);
+        LoginMenu.gameStage.setWidth(600);
         user = MainMenu.user;
         VBox vBox = new VBox();
+        vBox.setSpacing(10);
         Button button = new Button("back");
         button.setAlignment(Pos.TOP_LEFT);
         button.setOnAction(new EventHandler<ActionEvent>() {
@@ -80,5 +83,9 @@ public class MainMenuFXController {
         Stage stage = LoginMenu.gameStage;
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void startNewGame(ActionEvent actionEvent) throws Exception {
+        new GameMenu(MainMenu.user).start(LoginMenu.gameStage);
     }
 }

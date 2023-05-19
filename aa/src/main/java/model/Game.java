@@ -6,7 +6,7 @@ import java.util.HashMap;
 
 public abstract class Game{
     private static Level level = Level.TWO;
-    public static int initialBallsAmount;
+    public static int initialBallsAmount = 10;
     private static String targetCircleImageAddress = TargetCircle.class.getResource("/images/game/monster4.png").toExternalForm();
     private static HashMap<String, KeyCode> gameKeys = new HashMap<>() {{
         put("shoot", KeyCode.SPACE);

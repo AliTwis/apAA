@@ -31,6 +31,8 @@ public class AvatarMenu extends Application {
         File directory = new File("src/main/resources/images/avatars");
         VBox vBox = new VBox();
         Text text = new Text();
+        stage.setWidth(600);
+        stage.setHeight(400);
         vBox.setAlignment(Pos.CENTER);
         text.setText("Hello " + user.getUsername() + " please choose your avatar:");
         vBox.getChildren().add(text);

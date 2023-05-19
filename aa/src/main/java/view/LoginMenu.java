@@ -19,6 +19,8 @@ public class LoginMenu extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        stage.setWidth(600);
+        stage.setHeight(400);
         gameStage = stage;
         BorderPane borderPane = FXMLLoader.load(new URL(LoginMenu.class.getResource("/fxml/loginMenu.fxml").toExternalForm()));
         Scene scene = new Scene(borderPane);

@@ -13,6 +13,8 @@ public class ProfileMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         ProfileMenuController.setProfileMenu(this);
+        stage.setWidth(600);
+        stage.setHeight(500);
         menuLayout = FXMLLoader.load(ProfileMenu.class.getResource("/fxml/profileMenu.fxml"));
         scene = new Scene(menuLayout);
         stage.setScene(scene);

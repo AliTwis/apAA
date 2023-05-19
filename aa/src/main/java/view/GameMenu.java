@@ -21,6 +21,7 @@ import java.util.LinkedList;
 
 public class GameMenu extends Application {
     private Stage gameStage;
+    private User user;
     private Pane pauseLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/pause.fxml"));
     private Pane gameLayout = FXMLLoader.load(GameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));;
     private Pane wholeLayout = new Pane();
@@ -35,10 +36,11 @@ public class GameMenu extends Application {
     private boolean movable = false;
     private static SinglePlayerFXController gameController;
 
-    private GeneralGameController generalGameController = new GeneralGameController(this);
-
-    public GameMenu() throws IOException {
+    public GameMenu(User user) throws IOException {
+        this.user = user;
     }
+
+    private GeneralGameController generalGameController = new GeneralGameController(this);
 
     public static SinglePlayerFXController getGameController() {
         return gameController;
@@ -48,9 +50,10 @@ public class GameMenu extends Application {
         GameMenu.gameController = gameController;
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public Pane getGameLayout() {
+        return gameLayout;
     }
+
     @Override
     public void start(Stage stage) throws Exception {
         gameStage = stage;
@@ -60,12 +63,12 @@ public class GameMenu extends Application {
         stage.setHeight(700);
         generalGameController.addTimer();
         gameController.setIceProgress(0);
-        gameController.setUsername(username);
-        gameController.setBallsAmount(ballsAmount);
+        gameController.setUsername(user.getUsername());
+        gameController.setBallsAmount(Game.getInitialBallsAmount());
         gameController.setWind(wind);
         gameController.setLevel(Integer.toString(level));
         gameController.setScore(score);
-        game = new SinglePlayerGame(null, 10, stage, gameLayout);
+        game = new SinglePlayerGame(null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
         for (Ball ball : game.getPlayer().getBalls()) {
             ball.setBallAnimation(new BallAnimation(ball, game.getTargetCircle(), generalGameController));
         }
@@ -83,13 +86,16 @@ public class GameMenu extends Application {
                 }
                 else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
                     if (paused) {
+                        generalGameController.startTimeLines();
                         gameLayout.getChildren().remove(pauseLayout);
                         game.getTargetCircle().getAnimation().play();
                         gameLayout.setOpacity(1);
                         paused = false;
                     } else {
+                        generalGameController.stopTimeLines();
                         GameTransitions.stopTransitions();
                         gameLayout.getChildren().add(pauseLayout);
+                        pauseLayout.setFocusTraversable(false);
                         paused = true;
                     }
                 }
@@ -129,10 +135,11 @@ public class GameMenu extends Application {
         gameLayout.setStyle("-fx-background-color: 'red';");
         Label label = new Label("You lost!");
         gameLayout.getChildren().add(label);
-        //todo
+        generalGameController.lose(user, Game.getLevel());
     }
 
     public void win() {
+        generalGameController.win(user, Game.getLevel());
         gameLayout.setStyle("-fx-background-color: 'green';");
     }
 }

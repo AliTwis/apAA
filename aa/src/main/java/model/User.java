@@ -6,9 +6,8 @@ import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
+import java.time.ZonedDateTime;
+import java.util.*;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
@@ -27,7 +26,7 @@ public class User implements Comparable<User> {
         this.username = username;
         this.password = password;
         users.add(this);
-        this.setTime();
+        this.updateTime();
     }
 
     public static User getUserByName(String name) {
@@ -37,14 +36,17 @@ public class User implements Comparable<User> {
         return null;
     }
 
-    public void setTime() {
+    public void updateTime() {
         LocalDate localDate = java.time.LocalDate.now();
         this.getLastUpdate()[0] = localDate.getYear();
         this.getLastUpdate()[1] = localDate.getMonthValue();
         this.getLastUpdate()[2] = localDate.getDayOfMonth();
-        LocalTime localTime = java.time.LocalTime.now();
-        this.getLastUpdate()[3] = localTime.getHour();
-        this.getLastUpdate()[4] = localTime.getMinute();
+        ZonedDateTime localTime = java.time.ZonedDateTime.now();
+        int minute = localTime.getMinute();
+        int hour = localTime.getHour();
+        this.getLastUpdate()[3] = hour;
+        this.getLastUpdate()[4] = minute;
+        System.out.println(localTime.getHour() + ":" + localTime.getMinute() + " " + this.getLastUpdate()[4]);
     }
 
     public static void updateUsers() {
@@ -121,8 +123,8 @@ public class User implements Comparable<User> {
         return lastUpdate;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void increaseScore(int amount) {
+        this.score += amount;
     }
 
     public void setLastUpdate(int[] lastUpdate) {
@@ -170,9 +172,9 @@ public class User implements Comparable<User> {
         if (o.score != score) return o.score - score;
         for (int i = 0; i < 5; i++) {
             if (o.lastUpdate[i] != lastUpdate[i]) {
-                return o.lastUpdate[i] - lastUpdate[i];
+                return lastUpdate[i] - o.lastUpdate[i];
             }
         }
-        return o.username.compareTo(username);
+        return this.getUsername().compareTo(o.getUsername());
     }
 }

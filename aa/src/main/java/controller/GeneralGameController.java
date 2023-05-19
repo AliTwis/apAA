@@ -4,14 +4,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
-import model.Ball;
-import model.Player;
-import model.TargetCircle;
+import model.*;
 import view.GameMenu;
+import view.LoginMenu;
+import view.MainMenu;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -22,8 +25,10 @@ public class GeneralGameController {
     private boolean smallBall = true;
     private boolean visible = true;
     private boolean windActive = false;
-    private int minute = 1;
-    private int second = 5;
+    private int initialMinute = 1;
+    private int initialSecond = 5;
+    private int minute = initialMinute;
+    private int second = initialSecond;
     private HashMap<String, Timeline> timelines = new HashMap<>();
 
     public GeneralGameController(GameMenu gameMenu) {
@@ -88,7 +93,6 @@ public class GeneralGameController {
             int wind = new Random().nextInt(60) - 30;
             firstBall = balls.getFirst();
             firstBall.setxSpeed((int)(10 * Math.sin(Math.toRadians(wind))));
-            System.out.println("wind: " + wind + " x: " + Math.sin(Math.toRadians(wind)));
             GameMenu.getGameController().setWind(wind);
         }
     }
@@ -98,7 +102,7 @@ public class GeneralGameController {
         TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
         targetCircle.setRotationSpeed(targetCircle.getRotationSpeed() / 2);
         targetCircle.setFill(new ImagePattern(new Image(GameMenu.class.getResource("/images/game/ice1.png").toExternalForm())));
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), this::timing));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(Game.getLevel().getIceTime()), this::timing));
         timeline.setCycleCount(3);
         timeline.play();
         timeline.setOnFinished(new EventHandler<ActionEvent>() {
@@ -206,5 +210,91 @@ public class GeneralGameController {
             timelines.remove("timer");
         }
         GameMenu.getGameController().setTime(minute + ":" + second);
+    }
+
+    public void lose(User user, Level level) {
+        int score = gameMenu.getGame().getCurrentBall() * 7;
+        user.increaseScore(score);
+        User.updateUsers();
+        stopTimeLines();
+        showFinalResult(false, level);
+    }
+
+    public void win(User user, Level level) {
+        user.increaseScore(level.getNumber() * 150 + Game.getInitialBallsAmount() * 10);
+        user.updateTime();
+        User.updateUsers();
+        stopTimeLines();
+        showFinalResult(true, level);
+    }
+
+    public void stopTimeLines() {
+        for (Timeline timeline : timelines.values()) {
+            timeline.stop();
+        }
+    }
+
+    public void startTimeLines() {
+        for (Timeline timeline : timelines.values()) {
+            timeline.play();
+        }
+    }
+
+    public void showFinalResult(boolean won, Level level) {
+        Pane resultPane = new Pane();
+        resultPane.setStyle("-fx-background-color: 'white';");
+        resultPane.setLayoutX(75);//450
+        resultPane.setLayoutY(250);//700
+        resultPane.setPrefSize(300, 200);
+
+        Text result = new Text();
+        result.setTextAlignment(TextAlignment.CENTER);
+        if (won) result.setText("You have won!");
+        else result.setText("You have lost!");
+        result.setLayoutX(102);
+        result.setLayoutY(37);
+
+        Text pointString = new Text("Points:");
+        pointString.setTextAlignment(TextAlignment.CENTER);
+        pointString.setLayoutX(70);
+        pointString.setLayoutY(76);
+
+        Text pointNum = new Text();
+        pointNum.setTextAlignment(TextAlignment.CENTER);
+        pointNum.setLayoutX(186);
+        pointNum.setLayoutY(76);
+        if (won) pointNum.setText(Integer.toString(level.getNumber() * 150 + Game.getInitialBallsAmount() * 10));
+        else pointNum.setText(Integer.toString(gameMenu.getGame().getCurrentBall() * 7));
+
+        Text timeString = new Text("Time:");
+        timeString.setTextAlignment(TextAlignment.CENTER);
+        timeString.setLayoutX(70);
+        timeString.setLayoutY(130);
+
+        Text timeNum = new Text();
+        timeNum.setTextAlignment(TextAlignment.CENTER);
+        timeNum.setLayoutX(186);
+        timeNum.setLayoutY(130);
+        timeNum.setText((initialMinute * 60 + initialSecond - minute * 60 - second) + " seconds");
+
+        Button backButton = new Button("Back to main menu");
+        backButton.setLayoutX(78);
+        backButton.setLayoutY(147);
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    User user = MainMenu.user;
+                    new MainMenu(user).start(LoginMenu.gameStage);
+                } catch (Exception e) {
+                    System.out.println("We can't go to main menu there was a problem...");
+                }
+            }
+        });
+
+        resultPane.getChildren().addAll(result, pointString, pointNum, timeString, timeNum, backButton);
+        resultPane.setFocusTraversable(false);
+        gameMenu.getGameLayout().getChildren().add(resultPane);
+        gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
     }
 }
