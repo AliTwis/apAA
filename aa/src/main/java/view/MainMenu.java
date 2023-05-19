@@ -25,13 +25,6 @@ public class MainMenu extends Application {
     public void start(Stage stage) throws Exception {
         URL url = MainMenu.class.getResource("/fxml/mainMenu.fxml");
         VBox vBox = FXMLLoader.load(url);
-//        Button profileButton = new Button("profile", new ImageView(
-//                new Image(MainMenu.class.getResource("/images/icons/profileMenu.png").toExternalForm())));
-
-//        Button profileButton = new Button("...!!!...");
-//        profileButton.setStyle("-fx-background-size: 20; -fx-background-image: url('../../resources/images/icons/profileMenu.png');");
-//        profileButton.setAlignment(Pos.TOP_LEFT);
-//        vBox.getChildren().add(0, profileButton);
         Scene scene = new Scene(vBox);
         stage.setScene(scene);
         stage.show();

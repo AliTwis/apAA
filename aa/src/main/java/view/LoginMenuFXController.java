@@ -36,7 +36,9 @@ public class LoginMenuFXController {
             alert.setContentText(response);
             alert.showAndWait();
         } else {
-            MainMenu mainMenu = new MainMenu(User.getUserByName(username.getText()));
+            User user = User.getUserByName(username.getText());
+            MainMenu.user = user;
+            MainMenu mainMenu = new MainMenu(user);
             mainMenu.start(LoginMenu.gameStage);
         }
     }

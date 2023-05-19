@@ -3,9 +3,12 @@ package view;
 import controller.ProfileController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -15,6 +18,7 @@ import model.User;
 import java.util.ArrayList;
 
 public class MainMenuFXController {
+    public ImageView profileImage;
     private User user;
 
     public void showScoreboard(ActionEvent actionEvent) {
@@ -50,5 +54,10 @@ public class MainMenuFXController {
 
     public void showProfileMenu(ActionEvent actionEvent) throws Exception {
         new ProfileMenu().start(LoginMenu.gameStage);
+    }
+
+    @FXML
+    public void initialize() {
+        profileImage.setImage(new Image(MainMenu.user.getAvatarAddress()));
     }
 }
