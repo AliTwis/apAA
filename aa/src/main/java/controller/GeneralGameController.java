@@ -7,6 +7,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -15,6 +17,7 @@ import model.*;
 import view.GameMenu;
 import view.LoginMenu;
 import view.MainMenu;
+import view.MainMenuFXController;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -29,6 +32,7 @@ public class GeneralGameController {
     private int initialSecond = 5;
     private int minute = initialMinute;
     private int second = initialSecond;
+    private MediaPlayer mediaPlayer;
     private HashMap<String, Timeline> timelines = new HashMap<>();
 
     public GeneralGameController(GameMenu gameMenu) {
@@ -77,6 +81,9 @@ public class GeneralGameController {
     }
 
     public void shoot(Pane gameLayout, Player player) {
+        mediaPlayer = new MediaPlayer(new Media(GameMenu.class.getResource("/sound/affects/shootSoundAffect.mp3").toExternalForm()));
+        mediaPlayer.setVolume(1);
+        mediaPlayer.play();
         gameMenu.getGame().increaseCurrentBall();
         LinkedList<Ball> balls = player.getBalls();
         Ball firstBall = balls.getFirst();
@@ -86,7 +93,6 @@ public class GeneralGameController {
             gameLayout.getChildren().add(balls.getFirst());
         } else {
             gameMenu.win();
-            //todo for finishing the game and winning
         }
         checkPhase(gameMenu.getGame().getCurrentBall());
         if (windActive && balls.size() > 0) {
@@ -278,7 +284,7 @@ public class GeneralGameController {
         timeNum.setText((initialMinute * 60 + initialSecond - minute * 60 - second) + " seconds");
 
         Button backButton = new Button("Back to main menu");
-        backButton.setLayoutX(78);
+        backButton.setLayoutX(14);
         backButton.setLayoutY(147);
         backButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -292,7 +298,17 @@ public class GeneralGameController {
             }
         });
 
-        resultPane.getChildren().addAll(result, pointString, pointNum, timeString, timeNum, backButton);
+        Button rankingButton = new Button("Ranking");
+        rankingButton.setLayoutX(200);
+        rankingButton.setLayoutY(147);
+        rankingButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                MainMenuFXController.generalShowScoreboard(actionEvent);
+            }
+        });
+
+        resultPane.getChildren().addAll(result, pointString, pointNum, timeString, timeNum, backButton, rankingButton);
         resultPane.setFocusTraversable(false);
         gameMenu.getGameLayout().getChildren().add(resultPane);
         gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());

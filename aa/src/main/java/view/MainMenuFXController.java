@@ -4,32 +4,25 @@ import controller.ProfileController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 import model.User;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainMenuFXController {
     public ImageView profileImage;
-    private User user;
 
-    public void showScoreboard(ActionEvent actionEvent) {
+    public static void generalShowScoreboard(ActionEvent actionEvent) {
         LoginMenu.gameStage.setHeight(400);
         LoginMenu.gameStage.setWidth(600);
-        user = MainMenu.user;
+        User user = MainMenu.user;
         VBox vBox = new VBox();
         vBox.setSpacing(10);
         Button button = new Button("back");
@@ -77,15 +70,15 @@ public class MainMenuFXController {
         profileImage.setImage(new Image(MainMenu.user.getAvatarAddress()));
     }
 
-    public void showSettings(ActionEvent actionEvent) throws IOException {
-        Pane settingPane = FXMLLoader.load(MainMenu.class.getResource("/fxml/settings.fxml"));
-        Scene scene = new Scene(settingPane);
-        Stage stage = LoginMenu.gameStage;
-        stage.setScene(scene);
-        stage.show();
+    public void showSettings(ActionEvent actionEvent) throws Exception {
+        new SettingsMenu().start(LoginMenu.gameStage);
     }
 
     public void startNewGame(ActionEvent actionEvent) throws Exception {
         new GameMenu(MainMenu.user).start(LoginMenu.gameStage);
+    }
+
+    public void showScoreboard(ActionEvent actionEvent) {
+        generalShowScoreboard(actionEvent);
     }
 }

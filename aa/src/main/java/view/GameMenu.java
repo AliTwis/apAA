@@ -1,9 +1,11 @@
 package view;
 
 import controller.GeneralGameController;
+import controller.PauseMenuController;
 import controller.SinglePlayerFXController;
 import javafx.animation.Transition;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -54,6 +56,54 @@ public class GameMenu extends Application {
         return gameLayout;
     }
 
+    public Pane getPauseLayout() {
+        return pauseLayout;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Pane getWholeLayout() {
+        return wholeLayout;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getWind() {
+        return wind;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public int getBallsAmount() {
+        return ballsAmount;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public GeneralGameController getGeneralGameController() {
+        return generalGameController;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
         gameStage = stage;
@@ -62,11 +112,12 @@ public class GameMenu extends Application {
         stage.setWidth(450);
         stage.setHeight(700);
         generalGameController.addTimer();
+        PauseMenuController.setGameMenu(this);
         gameController.setIceProgress(0);
         gameController.setUsername(user.getUsername());
         gameController.setBallsAmount(Game.getInitialBallsAmount());
         gameController.setWind(wind);
-        gameController.setLevel(Integer.toString(level));
+        gameController.setLevel("level " + Game.getLevel().getNumber());
         gameController.setScore(score);
         game = new SinglePlayerGame(null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
         for (Ball ball : game.getPlayer().getBalls()) {
@@ -95,6 +146,8 @@ public class GameMenu extends Application {
                         generalGameController.stopTimeLines();
                         GameTransitions.stopTransitions();
                         gameLayout.getChildren().add(pauseLayout);
+                        pauseLayout.setLayoutX(25);
+                        pauseLayout.setLayoutY((pauseLayout.getHeight()) / 2);
                         pauseLayout.setFocusTraversable(false);
                         paused = true;
                     }
@@ -139,6 +192,7 @@ public class GameMenu extends Application {
     }
 
     public void win() {
+        GameTransitions.stopTransitions();
         generalGameController.win(user, Game.getLevel());
         gameLayout.setStyle("-fx-background-color: 'green';");
     }
