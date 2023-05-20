@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -53,8 +54,11 @@ public class GeneralGameController {
         if (!collision) {
             targetCircle.addBall(currentBall);
             GameMenu.getGameController().increaseScore();
-            GameMenu.getGameController().decreaseBall();
             GameMenu.getGameController().increaseIceProgress();
+            int currentBallsAmount = gameMenu.getGame().getCurrentBall();
+            if (currentBallsAmount < Game.initialBallsAmount / 2) GameMenu.getGameController().decreaseBall(Color.RED);
+            else if (Game.initialBallsAmount - currentBallsAmount <= 2) GameMenu.getGameController().decreaseBall(Color.GREEN);
+            else GameMenu.getGameController().decreaseBall(Color.BLUE);
         }
 
     }

@@ -3,6 +3,7 @@ package controller;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import view.GameMenu;
 
@@ -12,7 +13,6 @@ import java.util.ResourceBundle;
 public class SinglePlayerFXController implements Initializable {
     public Text username;
     public Text level;
-    public Button pause;
     public Text score;
     public Text wind;
     public Text ballsAmount;
@@ -22,6 +22,7 @@ public class SinglePlayerFXController implements Initializable {
     private int eachPoint = 10;
     private double eachIceProgress = 0.5;
     private int ballsLeft;
+    private static Color ballsAmountColor = Color.RED;
 
 
     @Override
@@ -66,9 +67,10 @@ public class SinglePlayerFXController implements Initializable {
         ballsLeft = number;
     }
 
-    public void decreaseBall() {
+    public void decreaseBall(Color color) {
         ballsLeft--;
         ballsAmount.setText(Integer.toString(ballsLeft));
+        ballsAmount.setFill(color);
     }
 
     public double getWind() {
