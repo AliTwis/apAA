@@ -28,6 +28,7 @@ public class SinglePlayerGameController extends GeneralGameController {
 
     public SinglePlayerGameController(SinglePlayerGameMenu gameMenu) {
         this.gameMenu = gameMenu;
+        GeneralGameController.gameMenu = gameMenu;
     }
 
     public void checkPhase(int current) {

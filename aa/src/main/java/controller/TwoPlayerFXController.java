@@ -7,12 +7,13 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Game;
 import model.GameFXController;
+import view.TwoPlayerGameMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TwoPlayerFXController extends SinglePlayerFXController implements Initializable {
-    public Label username, username1;
+    public Label username2, username1;
     public Text level;
     public Text score, score1;
     public Text wind;
@@ -25,12 +26,12 @@ public class TwoPlayerFXController extends SinglePlayerFXController implements I
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        TwoPlayerGameMenu.setGameController(this);
     }
 
     public void setUsernames(String name, String name1) {
-        username.setText(name);
-        username1.setText(name1);
+        username1.setText(name);
+        username2.setText(name1);
     }
 
     public void setScore1(int scoreString) {

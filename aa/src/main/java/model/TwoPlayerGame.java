@@ -43,6 +43,13 @@ public class TwoPlayerGame extends Game{
         return player;
     }
 
+    public void increaseCurrentBall() {
+        currentBall++;
+    }
+    public void increaseCurrentBall1() {
+        currentBall1++;
+    }
+
     public void setPlayer(Player player) {
         this.player = player;
     }

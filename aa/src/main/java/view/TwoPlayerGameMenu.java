@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -25,12 +26,16 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     private boolean movable = false;
     private static TwoPlayerFXController gameController;
 
-    public TwoPlayerGameMenu(User user, User user1) throws IOException {
-        this.user = user;
-        this.user1 = user1;
+    public static void setGameController(TwoPlayerFXController gameController) {
+        TwoPlayerGameMenu.gameController = gameController;
     }
 
-    private TwoPlayerGameController generalGameController = new TwoPlayerGameController();
+    public TwoPlayerGameMenu(/*User user, User user1*/) throws IOException {
+        /*this.user = user;
+        this.user1 = user1;*/
+    }
+
+    private TwoPlayerGameController generalGameController = new TwoPlayerGameController(this);
 
     public static SinglePlayerFXController getGameController() {
         return gameController;
@@ -39,6 +44,10 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
 //    public static void setGameController(SinglePlayerFXController gameController) {
 //        SinglePlayerGameMenu.gameController = gameController;
 //    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     public TwoPlayerGame getGame() {
         return game;
@@ -70,8 +79,19 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         return generalGameController;
     }
 
+    public boolean isMovable() {
+        return movable;
+    }
+
+    public void setMovable(boolean movable) {
+        this.movable = movable;
+    }
+
     @Override
     public void start(Stage stage) throws Exception {
+        //testing
+        user = new User("ali", ""); user1 = new User("mohmmmad", "");
+        //
         gameStage = stage;
         wholeLayout.getChildren().add(gameLayout);
         //initialize game
@@ -87,14 +107,21 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         gameController.setScore(0);
         game = new TwoPlayerGame(null, null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
         for (Ball ball : game.getPlayer().getBalls()) {
-//            ball.setBallAnimation(new BallAnimation(ball, game.getTargetCircle(), generalGameController));
+            ball.setBallAnimation(new BallAnimation2(ball, game.getTargetCircle(), generalGameController, game.getPlayer()));
         }
+        for (Ball ball : game.getPlayer1().getBalls()) {
+            ball.setBallAnimation(new BallAnimation2(ball, game.getTargetCircle(), generalGameController, game.getPlayer1()));
+        }
+
         scene = new Scene(wholeLayout);
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
-//                    generalGameController.shoot(gameLayout, game.getPlayer());
+                    generalGameController.shoot(gameLayout, game.getPlayer());
+                }
+                else if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot2"))) {
+                    generalGameController.shoot(gameLayout, game.getPlayer1());
                 }
                 else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
                     if (gameController.getIceProgress() > 0.95) {
@@ -134,6 +161,10 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     }
 
     public void lose() {
+        GameTransitions.stopTransitions();
+        gameLayout.setStyle("-fx-background-color: 'red';");
+        Label label = new Label("You lost!");
+        gameLayout.getChildren().add(label);
         //todo
     }
 

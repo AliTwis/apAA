@@ -29,7 +29,7 @@ public abstract class GeneralGameController {
     protected int second = initialSecond;
     protected MediaPlayer mediaPlayer;
     protected HashMap<String, Timeline> timelines = new HashMap<>();
-    GameMenusFunctions gameMenu;
+    static GameMenusFunctions gameMenu;
 
     public abstract void win(Level level, User... users);
     public abstract void lose(Level level, User... users);

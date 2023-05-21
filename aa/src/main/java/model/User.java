@@ -46,7 +46,6 @@ public class User implements Comparable<User> {
         int hour = localTime.getHour();
         this.getLastUpdate()[3] = hour;
         this.getLastUpdate()[4] = minute;
-        System.out.println(localTime.getHour() + ":" + localTime.getMinute() + " " + this.getLastUpdate()[4]);
     }
 
     public static void updateUsers() {

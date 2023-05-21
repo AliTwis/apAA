@@ -5,13 +5,13 @@ import controller.SinglePlayerGameController;
 import javafx.util.Duration;
 
 public class BallAnimation extends GameTransitions {
-    private Ball ball;
-    private TargetCircle centerBall;
-    private double desiredDistance;
+    protected Ball ball;
+    protected TargetCircle centerBall;
+    protected double desiredDistance;
 
-    private GeneralGameController gameController;
+    protected GeneralGameController gameController;
 
-    public BallAnimation(Ball ball, TargetCircle targetCircle, SinglePlayerGameController gameController) {
+    public BallAnimation(Ball ball, TargetCircle targetCircle, GeneralGameController gameController) {
         super.addTransition(this);
         this.gameController = gameController;
         this.ball = ball;
@@ -32,13 +32,13 @@ public class BallAnimation extends GameTransitions {
         if (doesIntersect()) {
             ball.setConnectedAngle(centerBall.getCurrentAngle());
             this.stop();
-            gameController.addBallToCenter(ball);
+            if (gameController instanceof SinglePlayerGameController) gameController.addBallToCenter(ball);
             ball.getLine().setVisible(true);
             GameTransitions.getTransitions().remove(this);
         }
     }
 
-    private boolean doesIntersect() {
+    protected boolean doesIntersect() {
         double x = ball.getCenterX() - centerBall.getCenterX();
         double y = ball.getCenterY() - centerBall.getCenterY();
         double distance = Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
