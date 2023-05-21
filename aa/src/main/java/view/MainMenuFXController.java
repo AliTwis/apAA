@@ -75,7 +75,7 @@ public class MainMenuFXController {
     }
 
     public void startNewGame(ActionEvent actionEvent) throws Exception {
-        new GameMenu(MainMenu.user).start(LoginMenu.gameStage);
+        new SinglePlayerGameMenu(MainMenu.user).start(LoginMenu.gameStage);
     }
 
     public void showScoreboard(ActionEvent actionEvent) {

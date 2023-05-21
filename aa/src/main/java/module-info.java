@@ -5,9 +5,9 @@ module aa {
     requires com.google.gson;
 
     exports view;
-    opens view to javafx.fxml;
     opens model to com.google.gson;
     exports controller;
     opens controller to javafx.fxml;
+    opens view to com.google.gson, javafx.fxml;
 
 }

@@ -9,7 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Game;
-import view.GameMenu;
 
 import java.io.IOException;
 import java.net.URL;

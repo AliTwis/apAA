@@ -20,8 +20,10 @@ public class Ball extends Circle {
 
     private Pane gameLayout;
 
-    public Ball(double v, double v1, double v2, int number, TargetCircle center) {
+    public Ball(double v, double v1, double v2, int number, TargetCircle center, boolean isFirst) {
         super(v, v1, v2);
+        if (isFirst) ySpeed = 10;
+        else ySpeed = -10;
         this.number = number;
         this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
         rotate = new Rotate();

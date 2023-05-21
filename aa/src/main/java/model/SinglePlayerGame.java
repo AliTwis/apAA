@@ -16,8 +16,6 @@ public class SinglePlayerGame extends Game{
     private Player player;
     private Stage stage;
     private int currentBall = 0;
-    private TargetCircle targetCircle;
-    private boolean finished = false;
 
     public SinglePlayerGame(User user, int ballsAmount, Stage stage, Pane gameLayout, Level level) {
         this.initialBallsAmount = ballsAmount;
@@ -27,7 +25,7 @@ public class SinglePlayerGame extends Game{
         targetCircle.setRotationSpeed(level.getRotationSpeed());
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
-            newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle);
+            newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle, true);
             //setting colors
             if (i < ballsAmount / 2) newBall.setFill(Color.MEDIUMVIOLETRED);
             else if (ballsAmount - i <= 2) newBall.setFill(Color.GREEN);
@@ -40,10 +38,6 @@ public class SinglePlayerGame extends Game{
 
     public int getCurrentBall() {
         return currentBall;
-    }
-
-    public void setCurrentBall(int currentBall) {
-        this.currentBall = currentBall;
     }
 
     public void increaseCurrentBall() {
@@ -64,13 +58,5 @@ public class SinglePlayerGame extends Game{
 
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    public TargetCircle getTargetCircle() {
-        return targetCircle;
-    }
-
-    public void setTargetCircle(TargetCircle targetCircle) {
-        this.targetCircle = targetCircle;
     }
 }

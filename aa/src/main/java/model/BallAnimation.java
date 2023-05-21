@@ -1,8 +1,7 @@
 package model;
 
 import controller.GeneralGameController;
-import javafx.animation.Transition;
-import javafx.application.Application;
+import controller.SinglePlayerGameController;
 import javafx.util.Duration;
 
 public class BallAnimation extends GameTransitions {
@@ -12,7 +11,7 @@ public class BallAnimation extends GameTransitions {
 
     private GeneralGameController gameController;
 
-    public BallAnimation(Ball ball, TargetCircle targetCircle, GeneralGameController gameController) {
+    public BallAnimation(Ball ball, TargetCircle targetCircle, SinglePlayerGameController gameController) {
         super.addTransition(this);
         this.gameController = gameController;
         this.ball = ball;

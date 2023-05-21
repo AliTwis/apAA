@@ -1,16 +1,16 @@
 package controller;
 
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import view.GameMenu;
+import model.GameFXController;
+import view.SinglePlayerGameMenu;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SinglePlayerFXController implements Initializable {
+public class SinglePlayerFXController extends GameFXController implements Initializable{
     public Text username;
     public Text level;
     public Text score;
@@ -27,7 +27,7 @@ public class SinglePlayerFXController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        GameMenu.setGameController(this);
+        SinglePlayerGameMenu.setGameController(this);
     }
 
     public void setUsername(String name) {
@@ -58,10 +58,6 @@ public class SinglePlayerFXController implements Initializable {
         ice.setProgress(Math.min(1, ice.getProgress() + eachIceProgress));
     }
 
-    public int getBallsLeft() {
-        return ballsLeft;
-    }
-
     public void setBallsAmount(int number) {
         ballsAmount.setText(Integer.toString(number));
         ballsLeft = number;
@@ -73,15 +69,43 @@ public class SinglePlayerFXController implements Initializable {
         ballsAmount.setFill(color);
     }
 
-    public double getWind() {
-        return Double.parseDouble(wind.getText());
-    }
-
     public void setWind(int windString) {
         wind.setText(Integer.toString(windString));
     }
 
     public void setTime(String timeString) {
         time.setText(timeString);
+    }
+
+    public int getEachPoint() {
+        return eachPoint;
+    }
+
+    public void setEachPoint(int eachPoint) {
+        this.eachPoint = eachPoint;
+    }
+
+    public double getEachIceProgress() {
+        return eachIceProgress;
+    }
+
+    public void setEachIceProgress(double eachIceProgress) {
+        this.eachIceProgress = eachIceProgress;
+    }
+
+    public int getBallsLeft() {
+        return ballsLeft;
+    }
+
+    public void setBallsLeft(int ballsLeft) {
+        this.ballsLeft = ballsLeft;
+    }
+
+    public static Color getBallsAmountColor() {
+        return ballsAmountColor;
+    }
+
+    public static void setBallsAmountColor(Color ballsAmountColor) {
+        SinglePlayerFXController.ballsAmountColor = ballsAmountColor;
     }
 }

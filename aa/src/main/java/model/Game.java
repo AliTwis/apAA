@@ -8,6 +8,7 @@ public abstract class Game{
     private static Level level = Level.TWO;
     public static int initialBallsAmount = 10;
     private static String targetCircleImageAddress = TargetCircle.class.getResource("/images/game/monster4.png").toExternalForm();
+    protected TargetCircle targetCircle;
     private static HashMap<String, KeyCode> gameKeys = new HashMap<>() {{
         put("shoot", KeyCode.SPACE);
         put("shoot2", KeyCode.ENTER);
@@ -15,6 +16,11 @@ public abstract class Game{
         put("pause", KeyCode.ESCAPE);
     }};
 
+
+
+    public TargetCircle getTargetCircle() {
+        return targetCircle;
+    }
     public static Level getLevel() {
         return level;
     }

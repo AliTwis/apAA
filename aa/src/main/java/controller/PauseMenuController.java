@@ -1,20 +1,20 @@
 package controller;
 
 import javafx.event.ActionEvent;
-import view.GameMenu;
+import view.SinglePlayerGameMenu;
 import view.LoginMenu;
 import view.MainMenu;
 
 import java.io.IOException;
 
 public class PauseMenuController {
-    private static GameMenu gameMenu;
+    private static SinglePlayerGameMenu gameMenu;
 
-    public static GameMenu getGameMenu() {
+    public static SinglePlayerGameMenu getGameMenu() {
         return gameMenu;
     }
 
-    public static void setGameMenu(GameMenu gameMenu) {
+    public static void setGameMenu(SinglePlayerGameMenu gameMenu) {
         PauseMenuController.gameMenu = gameMenu;
     }
 
@@ -35,7 +35,7 @@ public class PauseMenuController {
     }
 
     public void restart(ActionEvent actionEvent) throws Exception{
-        new GameMenu(gameMenu.getUser()).start(LoginMenu.gameStage);
+        new SinglePlayerGameMenu(gameMenu.getUser()).start(LoginMenu.gameStage);
     }
 
     public void selectMusic(ActionEvent actionEvent) throws IOException {
