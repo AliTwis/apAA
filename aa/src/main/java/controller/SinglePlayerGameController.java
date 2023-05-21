@@ -2,6 +2,7 @@ package controller;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -67,6 +68,13 @@ public class SinglePlayerGameController extends GeneralGameController {
             else SinglePlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
         }
 
+    }
+
+    public void endingTransition() {
+        TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
+        TranslateTransition transition = new TranslateTransition(Duration.millis(2000), targetCircle);
+        transition.setByY(targetCircle.getCenterY() - 10);
+        transition.setCycleCount(10);
     }
 
     public void shoot(Pane gameLayout, Player player) {

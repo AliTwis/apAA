@@ -143,6 +143,10 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
 
     public void lose() {
         GameTransitions.stopTransitions();
+        for (Ball ball : game.getTargetCircle().getBalls()) {
+            ball.setVisible(true);
+            ball.getLine().setVisible(true);
+        }
         gameLayout.setStyle("-fx-background-color: 'red';");
         Label label = new Label("You lost!");
         gameLayout.getChildren().add(label);

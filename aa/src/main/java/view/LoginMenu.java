@@ -27,12 +27,6 @@ public class LoginMenu extends Application {
         Media media = new Media(LoginMenu.class.getResource("/sound/slowmotion.mp3").toExternalForm());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setAutoPlay(true);
-        mediaPlayer.setOnStopped(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("hello");
-            }
-        });
         mediaPlayer.play();
         gameStage = stage;
         BorderPane borderPane = FXMLLoader.load(new URL(LoginMenu.class.getResource("/fxml/loginMenu.fxml").toExternalForm()));

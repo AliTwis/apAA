@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.util.Duration;
 import model.*;
@@ -60,10 +59,10 @@ public abstract class GeneralGameController {
         LinkedList<Ball> balls = gameMenu.getGame().getTargetCircle().getBalls();
         for (Ball ball : balls) {
             if (ball.isSmallBall()) {
-                ball.setRadius(ball.getRadius() + 5);
+                ball.setRadius(ball.getRadius() + 2.5);
                 ball.setSmallBall(false);
             } else {
-                ball.setRadius(ball.getRadius() - 5);
+                ball.setRadius(ball.getRadius() - 2.5);
                 ball.setSmallBall(true);
             }
         }
@@ -141,7 +140,7 @@ public abstract class GeneralGameController {
     public void shoot(Pane gameLayout, Player player) {
         mediaPlayer = new MediaPlayer(new Media(SinglePlayerGameMenu.class.getResource("/sound/affects/shootSoundAffect.mp3").toExternalForm()));
         mediaPlayer.setVolume(1);
-        mediaPlayer.play();
+        if (!Game.isMute()) mediaPlayer.play();
         LinkedList<Ball> balls = player.getBalls();
         Ball firstBall = balls.getFirst();
         firstBall.getBallAnimation().play();

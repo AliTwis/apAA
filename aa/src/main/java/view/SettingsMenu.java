@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class SettingsMenu extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        stage.setHeight(500);
+        stage.setHeight(550);
         stage.setWidth(600);
         Pane settingPane = FXMLLoader.load(MainMenu.class.getResource("/fxml/settings.fxml"));
         Scene scene = new Scene(settingPane);

@@ -33,6 +33,11 @@ public class SinglePlayerGame extends Game{
             player.getBalls().addLast(newBall);
         }
         gameLayout.getChildren().addAll(targetCircle, player.getBalls().getFirst(), player.getBalls().getFirst().getText());
+        gameLayout.getChildren().addAll(targetCircle.getBalls());
+        for (Ball ball : targetCircle.getBalls()) gameLayout.getChildren().add(ball.getLine());
+        for (Ball ball : player.getBalls()) {
+            gameLayout.getChildren().add(ball.getLine());
+        }
         player.getBalls().getFirst().getText().setVisible(true);
     }
 

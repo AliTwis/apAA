@@ -16,7 +16,69 @@ public class TargetCircle extends Circle {
     public TargetCircle(double v, double v1, double v2) {
         super(v, v1, v2);
         this.setFill(new ImagePattern(new Image(Game.getTargetCircleImageAddress())));
+        loadMap(Game.getTargetCircleMap());
         animation.play();
+    }
+
+    private void loadMap(int mapNumber) {
+        int desiredDistance = 155;
+        if (mapNumber == 1) {
+            for (int i = 0; i < 5; i++) {
+                Ball mapBall = new Ball(
+                        getCenterX() + desiredDistance * Math.sin(Math.toRadians(360 / 5 * i)),
+                        getCenterY() - desiredDistance * Math.cos(Math.toRadians(360 / 5 * i)),
+                        10,
+                        0,
+                        this,
+                        false
+                );
+                mapBall.getLine().setStartX(mapBall.getCenterX());
+                mapBall.getLine().setStartY(mapBall.getCenterY());
+                mapBall.getLine().setEndX(this.getCenterX());
+                mapBall.getLine().setEndY(this.getCenterY());
+                balls.addLast(mapBall);
+
+            }
+        }
+        else if (mapNumber == 2) {
+            for (int i = 0; i < 6; i++) {
+                Ball mapBall = new Ball(
+                        getCenterX() + desiredDistance * Math.sin(Math.toRadians(360 / 6 * i)),
+                        getCenterY() - desiredDistance * Math.cos(Math.toRadians(360 / 6 * i)),
+                        10,
+                        0,
+                        this,
+                        false
+                );
+                mapBall.getLine().setStartX(mapBall.getCenterX());
+                mapBall.getLine().setStartY(mapBall.getCenterY());
+                mapBall.getLine().setEndX(this.getCenterX());
+                mapBall.getLine().setEndY(this.getCenterY());
+                balls.addLast(mapBall);
+
+            }
+        }
+
+        else if (mapNumber == 3) {
+            for (int i = 0; i < 5; i++) {
+                Ball mapBall = new Ball(
+                        getCenterX() + desiredDistance * Math.sin(Math.toRadians(90 / 5 * i)),
+                        getCenterY() - desiredDistance * Math.cos(Math.toRadians(90 / 5 * i)),
+                        10,
+                        0,
+                        this,
+                        false
+                );
+                mapBall.getLine().setStartX(mapBall.getCenterX());
+                mapBall.getLine().setStartY(mapBall.getCenterY());
+                mapBall.getLine().setEndX(this.getCenterX());
+                mapBall.getLine().setEndY(this.getCenterY());
+                balls.addLast(mapBall);
+
+            }
+        }
+
+        for (Ball ball : balls) ball.getLine().setVisible(true);
     }
 
     public String getImageAddress() {
