@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import view.GameMenusFunctions;
 import view.SinglePlayerGameMenu;
 import view.LoginMenu;
 import view.MainMenu;
@@ -8,13 +9,9 @@ import view.MainMenu;
 import java.io.IOException;
 
 public class PauseMenuController {
-    private static SinglePlayerGameMenu gameMenu;
+    private static GameMenusFunctions gameMenu;
 
-    public static SinglePlayerGameMenu getGameMenu() {
-        return gameMenu;
-    }
-
-    public static void setGameMenu(SinglePlayerGameMenu gameMenu) {
+    public static void setGameMenu(GameMenusFunctions gameMenu) {
         PauseMenuController.gameMenu = gameMenu;
     }
 

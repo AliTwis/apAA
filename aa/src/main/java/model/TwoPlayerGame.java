@@ -19,20 +19,12 @@ public class TwoPlayerGame extends Game{
         Ball newBall;
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, stage.getHeight() - 50, 10, i, targetCircle, true);
-            //setting colors
-            if (i < ballsAmount / 2) newBall.setFill(Color.MEDIUMVIOLETRED);
-            else if (ballsAmount - i <= 2) newBall.setFill(Color.GREEN);
-            else newBall.setFill(Color.YELLOW);
             gameLayout.getChildren().add(newBall.getLine());
             player.getBalls().addLast(newBall);
         }
 
         for (int i = 0; i < ballsAmount; i++) {
             newBall = new Ball(stage.getWidth() / 2, 50, 10, i, targetCircle, false);
-            //setting colors
-            if (i < ballsAmount / 2) newBall.setFill(Color.MEDIUMVIOLETRED);
-            else if (ballsAmount - i <= 2) newBall.setFill(Color.GREEN);
-            else newBall.setFill(Color.YELLOW);
             gameLayout.getChildren().add(newBall.getLine());
             player1.getBalls().addLast(newBall);
         }

@@ -39,17 +39,17 @@ public class TwoPlayerFXController extends SinglePlayerFXController implements I
     }
 
     public void increaseScore1() {
-        score1.setText(Integer.toString(Integer.parseInt(score.getText()) + super.getEachPoint()));
+        score1.setText(Integer.toString(Integer.parseInt(score1.getText()) + super.getEachPoint()));
     }
 
     public void setBallsAmount1(int number) {
-        ballsAmount.setText(Integer.toString(number));
+        ballsAmount1.setText(Integer.toString(number));
         ballsLeft1 = number;
     }
 
     public void decreaseBall1(Color color) {
         ballsLeft1--;
-        ballsAmount.setText(Integer.toString(ballsLeft1));
-        ballsAmount.setFill(color);
+        ballsAmount1.setText(Integer.toString(ballsLeft1));
+        ballsAmount1.setFill(color);
     }
 }

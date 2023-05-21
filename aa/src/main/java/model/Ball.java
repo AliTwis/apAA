@@ -6,11 +6,13 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
+import javafx.scene.text.Text;
 import javafx.scene.transform.Rotate;
 
 public class Ball extends Circle {
     private double connectedAngle = -1;
     private Line line = new Line();
+    private Text text = new Text();
     private int xSpeed = 0;
     private int ySpeed = 10;
     private BallAnimation ballAnimation;
@@ -25,17 +27,23 @@ public class Ball extends Circle {
         if (isFirst) ySpeed = 10;
         else ySpeed = -10;
         this.number = number;
-        this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
+        text.setText(Integer.toString(number));
+        text.setX(v - 5);
+        text.setY(v1 + 5);
+        if (isFirst) this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
+        else this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball2.png").toExternalForm())));
         rotate = new Rotate();
         rotate.setPivotX(center.getCenterX());
         rotate.setPivotY(center.getCenterY());
         this.getTransforms().add(rotate);
         line.getTransforms().add(rotate);
+        text.getTransforms().add(rotate);
         this.getLine().setStartX(this.getCenterX());
         this.getLine().setStartY(this.getCenterY());
         this.getLine().setEndX(center.getCenterX());
         this.getLine().setEndY(center.getCenterY());
         line.setVisible(false);
+        text.setVisible(false);
     }
 
 
@@ -106,5 +114,9 @@ public class Ball extends Circle {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public Text getText() {
+        return text;
     }
 }

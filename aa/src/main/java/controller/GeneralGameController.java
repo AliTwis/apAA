@@ -87,12 +87,14 @@ public abstract class GeneralGameController {
             for (Ball ball : balls) {
                 ball.setVisible(false);
                 ball.getLine().setVisible(false);
+                ball.getText().setVisible(false);
             }
             visible = false;
         } else {
             for (Ball ball : balls) {
                 ball.setVisible(true);
                 ball.getLine().setVisible(true);
+                ball.getText().setVisible(true);
             }
             visible = true;
         }
@@ -132,7 +134,8 @@ public abstract class GeneralGameController {
             timeline.stop();
             timelines.remove("timer");
         }
-        SinglePlayerGameMenu.getGameController().setTime(minute + ":" + second);
+        if (SinglePlayerGameMenu.getGameController() != null) SinglePlayerGameMenu.getGameController().setTime(minute + ":" + second);
+        if (TwoPlayerGameMenu.getGameController() != null) TwoPlayerGameMenu.getGameController().setTime(minute + ":" + second);
     }
 
     public void shoot(Pane gameLayout, Player player) {
@@ -144,7 +147,8 @@ public abstract class GeneralGameController {
         firstBall.getBallAnimation().play();
         balls.removeFirst();
         if (balls.size() > 0) {
-            gameLayout.getChildren().add(balls.getFirst());
+            gameLayout.getChildren().addAll(balls.getFirst(), balls.getFirst().getText());
+            balls.getFirst().getText().setVisible(true);
         } else {
             gameMenu.win();
         }
@@ -157,7 +161,8 @@ public abstract class GeneralGameController {
     }
 
     public void freeze() {
-        SinglePlayerGameMenu.getGameController().setIceProgress(0);
+        if (SinglePlayerGameMenu.getGameController() != null) SinglePlayerGameMenu.getGameController().setIceProgress(0);
+        if (TwoPlayerGameMenu.getGameController() != null) TwoPlayerGameMenu.getGameController().setIceProgress(0);
         TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
         targetCircle.setRotationSpeed(targetCircle.getRotationSpeed() / 2);
         targetCircle.setFill(new ImagePattern(new Image(SinglePlayerGameMenu.class.getResource("/images/game/ice1.png").toExternalForm())));

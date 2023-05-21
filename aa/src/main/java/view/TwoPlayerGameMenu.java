@@ -37,7 +37,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
 
     private TwoPlayerGameController generalGameController = new TwoPlayerGameController(this);
 
-    public static SinglePlayerFXController getGameController() {
+    public static TwoPlayerFXController getGameController() {
         return gameController;
     }
 
@@ -97,14 +97,16 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         //initialize game
         stage.setWidth(450);
         stage.setHeight(700);
-//        generalGameController.addTimer();
-//        PauseMenuController.setGameMenu(this);
+        generalGameController.addTimer();
+        PauseMenuController.setGameMenu(this);
         gameController.setIceProgress(0);
         gameController.setUsernames(user.getUsername(), user1.getUsername());
         gameController.setBallsAmount(Game.getInitialBallsAmount());
         gameController.setWind(0);
+        gameController.setBallsAmount1(Game.getInitialBallsAmount());
         gameController.setLevel("level " + Game.getLevel().getNumber());
         gameController.setScore(0);
+        gameController.setScore1(0);
         game = new TwoPlayerGame(null, null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
         for (Ball ball : game.getPlayer().getBalls()) {
             ball.setBallAnimation(new BallAnimation2(ball, game.getTargetCircle(), generalGameController, game.getPlayer()));
@@ -125,18 +127,18 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
                 }
                 else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
                     if (gameController.getIceProgress() > 0.95) {
-//                        generalGameController.freeze();
+                        generalGameController.freeze();
                     }
                 }
                 else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
                     if (paused) {
-//                        generalGameController.startTimeLines();
+                        generalGameController.startTimeLines();
                         gameLayout.getChildren().remove(pauseLayout);
                         game.getTargetCircle().getAnimation().play();
                         gameLayout.setOpacity(1);
                         paused = false;
                     } else {
-//                        generalGameController.stopTimeLines();
+                        generalGameController.stopTimeLines();
                         GameTransitions.stopTransitions();
                         gameLayout.getChildren().add(pauseLayout);
                         pauseLayout.setLayoutX(25);

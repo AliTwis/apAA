@@ -45,23 +45,27 @@ public class TwoPlayerGameController extends GeneralGameController {
             }
         }
 
-
-
         if (!collision) {
+            TwoPlayerGameMenu.getGameController().increaseIceProgress();
             targetCircle.addBall(currentBall);
-            System.out.println(player == null);
             if (player.equals(gameMenu.getGame().getPlayer())) {
                 TwoPlayerGameMenu.getGameController().increaseScore();
-                TwoPlayerGameMenu.getGameController().increaseIceProgress();
                 int currentBallsAmount = gameMenu.getGame().getCurrentBall();
-//                if (currentBallsAmount < Game.initialBallsAmount / 2)
-//                    SinglePlayerGameMenu.getGameController().decreaseBall(Color.RED);
-//                else if (Game.initialBallsAmount - currentBallsAmount <= 2)
-//                    SinglePlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
-//                else SinglePlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
+                if (currentBallsAmount < Game.initialBallsAmount / 2)
+                    TwoPlayerGameMenu.getGameController().decreaseBall(Color.RED);
+                else if (Game.initialBallsAmount - currentBallsAmount <= 2)
+                    TwoPlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
+                else TwoPlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
+
             }
             else {
-
+                TwoPlayerGameMenu.getGameController().increaseScore1();
+                int currentBallsAmount = gameMenu.getGame().getCurrentBall();
+                if (currentBallsAmount < Game.initialBallsAmount / 2)
+                    TwoPlayerGameMenu.getGameController().decreaseBall1(Color.RED);
+                else if (Game.initialBallsAmount - currentBallsAmount <= 2)
+                    TwoPlayerGameMenu.getGameController().decreaseBall1(Color.GREEN);
+                else TwoPlayerGameMenu.getGameController().decreaseBall1(Color.BLUE);
             }
         }
     }

@@ -28,12 +28,15 @@ public class BallAnimation extends GameTransitions {
         ball.getLine().setStartY(ball.getCenterY());
         ball.getLine().setEndX(centerBall.getCenterX());
         ball.getLine().setEndY(centerBall.getCenterY());
+        ball.getText().setX(ball.getCenterX() - 10);
+        ball.getText().setY(ball.getCenterY() + 10);
         gameController.isOutOfGame(ball);
         if (doesIntersect()) {
             ball.setConnectedAngle(centerBall.getCurrentAngle());
             this.stop();
             if (gameController instanceof SinglePlayerGameController) gameController.addBallToCenter(ball);
             ball.getLine().setVisible(true);
+            ball.getText().setVisible(true);
             GameTransitions.getTransitions().remove(this);
         }
     }
