@@ -24,6 +24,8 @@ public class MainMenuFXController {
         LoginMenu.gameStage.setWidth(600);
         User user = MainMenu.user;
         VBox vBox = new VBox();
+        vBox.getStylesheets().add(MainMenu.class.getResource("/css/background.css").toExternalForm());
+        vBox.getStyleClass().add("scoreboard");
         vBox.setSpacing(10);
         Button button = new Button("back");
         button.setAlignment(Pos.TOP_LEFT);

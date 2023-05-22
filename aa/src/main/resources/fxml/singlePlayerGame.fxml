@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SinglePlayerFXController">
+<Pane stylesheets="@../css/game.css, @../css/background.css"  styleClass="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SinglePlayerFXController">
    <children>
       <ProgressBar fx:id="ice" layoutX="-41.0" layoutY="350.0" prefWidth="200.0" progress="0.0" rotate="270.0" />
       <Text fx:id="username" layoutX="18.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text=" Text" wrappingWidth="41.2294921875" />

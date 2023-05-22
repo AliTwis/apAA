@@ -16,10 +16,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import model.*;
-import view.SinglePlayerGameMenu;
-import view.LoginMenu;
-import view.MainMenu;
-import view.MainMenuFXController;
+import view.*;
 
 import java.util.LinkedList;
 import java.util.Random;
@@ -113,7 +110,9 @@ public class SinglePlayerGameController extends GeneralGameController {
 
     public void showFinalResult(boolean won, Level level) {
         Pane resultPane = new Pane();
-        resultPane.setStyle("-fx-background-color: 'white';");
+//        resultPane.setStyle("-fx-background-color: 'white';");
+        resultPane.getStylesheets().add(AvatarMenu.class.getResource("/css/game.css").toExternalForm());
+        resultPane.getStyleClass().add("ending");
         resultPane.setLayoutX(75);//450
         resultPane.setLayoutY(250);//700
         resultPane.setPrefSize(300, 200);

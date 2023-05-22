@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import model.User;
+import view.LoginMenu;
 import view.MainMenu;
 import view.ProfileMenu;
 
@@ -78,6 +79,11 @@ public class ProfileMenuController {
                 } else {
                     profileMenu.getMenuLayout().getChildren().remove(usernamePane);
                     User.updateUsers();
+                    try {
+                        new ProfileMenu().start(LoginMenu.gameStage);
+                    } catch (Exception e) {
+                        System.out.println("there was a problem");
+                    }
                 }
             }
         });

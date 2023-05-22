@@ -1,0 +1,70 @@
+.game {
+    -fx-background-image: url("../images/background/background3.png");
+    -fx-background-size: cover;
+    -fx-opacity: 1;
+}
+
+.root {
+    -fx-background-image: url("../images/background/menuBackground.jpg");
+    -fx-background-size: cover;
+    -fx-opacity: 1;
+}
+
+.avatar {
+    -fx-background-image: url("../images/background/background2.png");
+    -fx-background-size: 600 800;
+}
+
+.scoreboard {
+    -fx-background-image: url("../images/background/scoreboard.png");
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+}
+
+Button {
+    -fx-background-color: #FFD814;
+    -fx-border-color: 1px solid #FCD200;
+    -fx-background-size: 11px;
+    -fx-text-alignment: center;
+    color: #0F1111;
+}
+
+Label {
+    -fx-text-fill: yellow;
+}
+
+RadioButton {
+    -fx-text-fill: yellow;
+}
+
+CheckBox {
+    -fx-text-fill: yellow;
+}
+
+ChoiceBox {
+    -fx-text-fill: black;
+    -fx-background-color: black;
+}
+
+Button:focused {
+    -fx-border-color: #F2C200;
+    -fx-text-fill: #F2C200;
+    -fx-background-color: transparent;
+}
+
+TextField, PasswordField {
+    -fx-background-color: transparent;
+    -fx-border-color: purple;
+    -fx-prompt-text-fill: pink;
+    -fx-text-fill: darkBlue;
+}
+
+.ending {
+    -fx-background-image: url("../images/background/background3.png");
+    -fx-background-size: 300 400;
+}
+
+.pauseElements {
+    -fx-background-image: url("../images/background/background3.png");
+    -fx-background-size: cover;
+}

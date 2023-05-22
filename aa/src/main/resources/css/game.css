@@ -1,0 +1,9 @@
+Text {
+    -fx-fill: yellow;
+}
+
+.ending {
+    -fx-background-image: url("../images/background/background3.png");
+    -fx-background-size: 300 400;
+    -fx-opacity: 1;
+}

@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.Game;
+import view.MainMenu;
 
 import java.io.IOException;
 import java.net.URL;
@@ -26,6 +27,8 @@ public class GuideFXController implements Initializable {
     public static void showGuide(Pane pane, Scene scene) {
         try {
             guidePane = FXMLLoader.load(GuideFXController.class.getResource("/fxml/guide.fxml"));
+            guidePane.getStylesheets().add(MainMenu.class.getResource("/css/background.css").toExternalForm());
+            guidePane.getStyleClass().add("pauseElements");
         } catch (IOException e) {
             System.out.println("there was a problem with loading guide.fxml");
         }

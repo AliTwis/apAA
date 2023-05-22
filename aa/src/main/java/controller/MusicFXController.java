@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.layout.Pane;
 import view.LoginMenu;
+import view.MainMenu;
 
 import java.io.IOException;
 
@@ -14,6 +15,8 @@ public class MusicFXController {
     public static void selectMusic(Pane gamePane) throws IOException {
         MusicFXController.gamePane = gamePane;
         musicPane = FXMLLoader.load(MusicFXController.class.getResource("/fxml/selectMusic.fxml"));
+        musicPane.getStylesheets().add(MainMenu.class.getResource("/css/background.css").toExternalForm());
+        musicPane.getStyleClass().add("pauseElements");
         musicPane.setPrefWidth(450);
         musicPane.setPrefHeight(700);
         musicPane.setStyle("-fx-background-color: 'white';");
