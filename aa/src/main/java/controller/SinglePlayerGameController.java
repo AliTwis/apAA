@@ -15,6 +15,7 @@ import view.*;
 import java.util.LinkedList;
 
 public class SinglePlayerGameController extends GeneralGameController {
+    private static Pane resultPane;
     SinglePlayerGameMenu gameMenu;
 
     public SinglePlayerGameController(SinglePlayerGameMenu gameMenu) {
@@ -30,6 +31,7 @@ public class SinglePlayerGameController extends GeneralGameController {
         } else if (current == initial / 2) {
             changeVisibilityPhase3();
         } else if (current == ((initial / 4) * 3)) {
+            changeWindPhase4();
             changeWindPhase4();
             gameMenu.setMovable(true);
         }
@@ -108,73 +110,5 @@ public class SinglePlayerGameController extends GeneralGameController {
         showFinalResult(true, level);
     }
 
-    public void showFinalResult(boolean won, Level level) {
-        Pane resultPane = new Pane();
-//        resultPane.setStyle("-fx-background-color: 'white';");
-        resultPane.getStylesheets().add(AvatarMenu.class.getResource("/css/game.css").toExternalForm());
-        resultPane.getStyleClass().add("ending");
-        resultPane.setLayoutX(75);//450
-        resultPane.setLayoutY(250);//700
-        resultPane.setPrefSize(300, 200);
 
-        Text result = new Text();
-        result.setTextAlignment(TextAlignment.CENTER);
-        if (won) result.setText("You have won!");
-        else result.setText("You have lost!");
-        result.setLayoutX(102);
-        result.setLayoutY(37);
-
-        Text pointString = new Text("Points:");
-        pointString.setTextAlignment(TextAlignment.CENTER);
-        pointString.setLayoutX(70);
-        pointString.setLayoutY(76);
-
-        Text pointNum = new Text();
-        pointNum.setTextAlignment(TextAlignment.CENTER);
-        pointNum.setLayoutX(186);
-        pointNum.setLayoutY(76);
-        if (won) pointNum.setText(Integer.toString(level.getNumber() * 150 + Game.getInitialBallsAmount() * 10));
-        else pointNum.setText(Integer.toString(gameMenu.getGame().getCurrentBall() * 7));
-
-        Text timeString = new Text("Time:");
-        timeString.setTextAlignment(TextAlignment.CENTER);
-        timeString.setLayoutX(70);
-        timeString.setLayoutY(130);
-
-        Text timeNum = new Text();
-        timeNum.setTextAlignment(TextAlignment.CENTER);
-        timeNum.setLayoutX(186);
-        timeNum.setLayoutY(130);
-        timeNum.setText((initialMinute * 60 + initialSecond - minute * 60 - second) + " seconds");
-
-        Button backButton = new Button("Back to main menu");
-        backButton.setLayoutX(14);
-        backButton.setLayoutY(147);
-        backButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    User user = MainMenu.user;
-                    new MainMenu(user).start(LoginMenu.gameStage);
-                } catch (Exception e) {
-                    System.out.println("We can't go to main menu there was a problem...");
-                }
-            }
-        });
-
-        Button rankingButton = new Button("Ranking");
-        rankingButton.setLayoutX(200);
-        rankingButton.setLayoutY(147);
-        rankingButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                MainMenuFXController.generalShowScoreboard(actionEvent);
-            }
-        });
-
-        resultPane.getChildren().addAll(result, pointString, pointNum, timeString, timeNum, backButton, rankingButton);
-        resultPane.setFocusTraversable(false);
-        gameMenu.getGameLayout().getChildren().add(resultPane);
-        gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
-    }
 }

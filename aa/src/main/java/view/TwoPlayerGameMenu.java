@@ -104,8 +104,8 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     @Override
     public void start(Stage stage) throws Exception {
         //testing
-        user = new User("ali", "");
-        user1 = new User("mohmmmad", "");
+        user = new User("aliReza", "");
+        user1 = new User("mohammad", "");
         //
         gameStage = stage;
         wholeLayout.getChildren().add(gameLayout);
@@ -122,7 +122,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         gameController.setLevel("level " + Game.getLevel().getNumber());
         gameController.setScore(0);
         gameController.setScore1(0);
-        game = new TwoPlayerGame(null, null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
+        game = new TwoPlayerGame(user, user1, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
         for (Ball ball : game.getPlayer().getBalls()) {
             ball.setBallAnimation(new BallAnimation2(ball, game.getTargetCircle(), generalGameController, game.getPlayer()));
         }
@@ -173,12 +173,10 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     public void lose() {
         GameTransitions.stopTransitions();
         gameLayout.setStyle("-fx-background-color: 'red';");
-        Label label = new Label("You lost!");
-        gameLayout.getChildren().add(label);
-        //todo
     }
 
     public void win() {
-        //todo
+        GameTransitions.stopTransitions();
+
     }
 }

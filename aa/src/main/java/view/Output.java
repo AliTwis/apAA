@@ -28,7 +28,7 @@ public enum Output {
     ;
     private final String english;
     private final String persian;
-    private static boolean isEnglish = false;
+    private static boolean isEnglish = true;
 
     Output(String english, String persian) {
         this.english = english;

@@ -9,6 +9,7 @@ public abstract class Game {
     public static int initialBallsAmount = 10;
     private static String targetCircleImageAddress = TargetCircle.class.getResource("/images/game/monster4.png").toExternalForm();
     private static int targetCircleMap = 0;
+    public abstract int getCurrentBall();
     private static boolean Mute = false;
     protected TargetCircle targetCircle;
     private static HashMap<String, KeyCode> gameKeys = new HashMap<>() {{

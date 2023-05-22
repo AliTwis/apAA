@@ -23,14 +23,7 @@ public class BallAnimation extends GameTransitions {
 
     @Override
     protected void interpolate(double v) {
-        ball.setCenterY(ball.getCenterY() - ball.getySpeed());
-        ball.setCenterX(ball.getCenterX() + ball.getxSpeed());
-        ball.getLine().setStartX(ball.getCenterX());
-        ball.getLine().setStartY(ball.getCenterY());
-        ball.getLine().setEndX(centerBall.getCenterX());
-        ball.getLine().setEndY(centerBall.getCenterY());
-        ball.getText().setX(ball.getCenterX() - 10);
-        ball.getText().setY(ball.getCenterY() + 10);
+        addressingBallLine();
         gameController.isOutOfGame(ball);
         if (doesIntersect()) {
             ball.setConnectedAngle(centerBall.getCurrentAngle());
@@ -40,6 +33,17 @@ public class BallAnimation extends GameTransitions {
             ball.getText().setVisible(true);
             GameTransitions.getTransitions().remove(this);
         }
+    }
+
+    protected void addressingBallLine() {
+        ball.setCenterY(ball.getCenterY() - ball.getySpeed());
+        ball.setCenterX(ball.getCenterX() + ball.getxSpeed());
+        ball.getLine().setStartX(ball.getCenterX());
+        ball.getLine().setStartY(ball.getCenterY());
+        ball.getLine().setEndX(centerBall.getCenterX());
+        ball.getLine().setEndY(centerBall.getCenterY());
+        ball.getText().setX(ball.getCenterX() - 10);
+        ball.getText().setY(ball.getCenterY() + 10);
     }
 
     protected boolean doesIntersect() {

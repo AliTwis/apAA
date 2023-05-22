@@ -177,8 +177,6 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
         }
         gameLayout.getStyleClass().remove("game");
         gameLayout.getStyleClass().add("lose");
-        Label label = new Label("You lost!");
-        gameLayout.getChildren().add(label);
         generalGameController.lose(Game.getLevel(), user);
     }
 

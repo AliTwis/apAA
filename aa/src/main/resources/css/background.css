@@ -26,15 +26,19 @@ Button {
     -fx-border-color: 1px solid #FCD200;
     -fx-background-size: 11px;
     -fx-text-alignment: center;
+    -fx-font-family: "JetBrains Mono";
     color: #0F1111;
 }
 
 Label, RadioButton, CheckBox {
     -fx-text-fill: yellow;
+    -fx-font-family: "JetBrains Mono";
+    -fx-font-style: italic;
 }
 
 Text {
     -fx-fill: yellow;
+    -fx-font-family: "JetBrains Mono";
 }
 
 ChoiceBox {
@@ -53,6 +57,7 @@ TextField, PasswordField {
     -fx-border-color: purple;
     -fx-prompt-text-fill: pink;
     -fx-text-fill: darkBlue;
+    -fx-font-family: "JetBrains Mono";
 }
 
 .ending {

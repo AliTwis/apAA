@@ -4,16 +4,17 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.ImagePattern;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
 import model.*;
-import view.GameMenusFunctions;
-import view.SinglePlayerGameMenu;
-import view.TwoPlayerGameMenu;
+import view.*;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -97,7 +98,23 @@ public abstract class GeneralGameController {
         for (int i = 0; i < balls.size(); i++) {
             Ball firstBall = balls.get(i);
             for (int j = i + 1; j < balls.size(); j++) {
-                if (firstBall.getBoundsInParent().intersects(balls.get(j).getBoundsInParent())) gameMenu.lose();
+                if (firstBall.getBoundsInParent().intersects(balls.get(j).getBoundsInParent())) {
+                    gameMenu.lose();
+                    if (gameMenu instanceof TwoPlayerGameMenu) {
+                        TwoPlayerGameMenu twoPlayerGameMenu = (TwoPlayerGameMenu) gameMenu;
+                        if (twoPlayerGameMenu.getGame().getCurrentBall() > twoPlayerGameMenu.getGame().getCurrentBall1()) {
+                            twoPlayerGameMenu.getGeneralGameController().lose(Game.getLevel(),
+                                    twoPlayerGameMenu.getGame().getPlayer().getUser(),
+                                    twoPlayerGameMenu.getGame().getPlayer1().getUser()
+                            );
+                        } else {
+                            twoPlayerGameMenu.getGeneralGameController().lose(Game.getLevel(),
+                                    twoPlayerGameMenu.getGame().getPlayer1().getUser(),
+                                    twoPlayerGameMenu.getGame().getPlayer().getUser()
+                            );
+                        }
+                    }
+                }
             }
         }
     }
@@ -166,7 +183,7 @@ public abstract class GeneralGameController {
     }
 
     public void shoot(Pane gameLayout, Player player) {
-        if (player.getBalls().size() <= 0) return;
+        if (player.getBalls().size() == 0) return;
         mediaPlayer = new MediaPlayer(new Media(SinglePlayerGameMenu.class.getResource("/sound/affects/shootSoundAffect.mp3").toExternalForm()));
         mediaPlayer.setVolume(1);
         if (!Game.isMute()) mediaPlayer.play();
@@ -205,5 +222,128 @@ public abstract class GeneralGameController {
                 ball.getCenterX() <= 0 || ball.getxSpeed() >= gameMenu.getGameStage().getWidth()) {
             gameMenu.lose();
         }
+    }
+
+    private Pane resultPane;
+
+    private void setupFinalResult() {
+        resultPane = new Pane();
+        resultPane.getStylesheets().add(AvatarMenu.class.getResource("/css/game.css").toExternalForm());
+        resultPane.getStyleClass().add("ending");
+        resultPane.setLayoutX(75);//450
+        resultPane.setLayoutY(250);//700
+        resultPane.setPrefSize(300, 200);
+
+        Text pointString = new Text("Points:");
+        pointString.setTextAlignment(TextAlignment.CENTER);
+        pointString.setLayoutX(70);
+        pointString.setLayoutY(76);
+
+        Text timeString = new Text("Time:");
+        timeString.setTextAlignment(TextAlignment.CENTER);
+        timeString.setLayoutX(70);
+        timeString.setLayoutY(130);
+
+        Text timeNum = new Text();
+        timeNum.setTextAlignment(TextAlignment.CENTER);
+        timeNum.setLayoutX(186);
+        timeNum.setLayoutY(130);
+        timeNum.setText((initialMinute * 60 + initialSecond - minute * 60 - second) + " seconds");
+
+        Button backButton = new Button("Back to main menu");
+        backButton.setLayoutX(14);
+        backButton.setLayoutY(147);
+        backButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    User user = MainMenu.user;
+                    new MainMenu(user).start(LoginMenu.gameStage);
+                } catch (Exception e) {
+                    System.out.println("We can't go to main menu there was a problem...");
+                }
+            }
+        });
+
+        Button rankingButton = new Button("Ranking");
+        rankingButton.setLayoutX(200);
+        rankingButton.setLayoutY(147);
+        rankingButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                MainMenuFXController.generalShowScoreboard(actionEvent);
+            }
+        });
+
+        resultPane.getChildren().addAll(pointString, timeString, timeNum, backButton, rankingButton);
+    }
+
+    public void showFinalResult(boolean won, Level level) {
+        setupFinalResult();
+        Text result = new Text();
+        result.setTextAlignment(TextAlignment.CENTER);
+        if (won) result.setText("You have won!");
+        else result.setText("You have lost!");
+        result.setLayoutX(102);
+        result.setLayoutY(37);
+
+        Text pointNum = new Text();
+        pointNum.setTextAlignment(TextAlignment.CENTER);
+        pointNum.setLayoutX(186);
+        pointNum.setLayoutY(76);
+        if (won) pointNum.setText(Integer.toString(level.getNumber() * 150 + Game.getInitialBallsAmount() * 10));
+        else pointNum.setText(Integer.toString(gameMenu.getGame().getCurrentBall() * 7));
+
+        resultPane.getChildren().addAll(result, pointNum);
+        resultPane.setFocusTraversable(false);
+        gameMenu.getGameLayout().getChildren().add(resultPane);
+        gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
+    }
+
+    public void showFinalResult2(int firstUserPoint, int secondUserPoint, String username, String username1) {
+        setupFinalResult();
+        if (gameMenu instanceof SinglePlayerGameMenu) return;
+        resultPane.getStylesheets().add(AvatarMenu.class.getResource("/css/game.css").toExternalForm());
+        resultPane.getStyleClass().add("ending");
+        resultPane.setLayoutX(75);//450
+        resultPane.setLayoutY(250);//700
+        resultPane.setPrefSize(300, 200);
+
+        Text result = new Text();
+        result.setTextAlignment(TextAlignment.CENTER);
+        if (firstUserPoint > secondUserPoint) result.setText(username + " beats " + username1 + "!");
+        else if (secondUserPoint > firstUserPoint) result.setText(username1 + " beats " + username + "!");
+        else result.setText("Draw");
+        result.setLayoutX(62);
+        result.setLayoutY(37);
+
+        Text user = new Text();
+        user.setTextAlignment(TextAlignment.CENTER);
+        user.setText(username);
+        user.setLayoutX(166);
+        user.setLayoutY(37);
+
+        Text user1 = new Text();
+        user1.setTextAlignment(TextAlignment.CENTER);
+        user1.setText(username1);
+        user1.setLayoutX(226);
+        user1.setLayoutY(37);
+
+        Text pointNum = new Text();
+        pointNum.setTextAlignment(TextAlignment.CENTER);
+        pointNum.setLayoutX(186);
+        pointNum.setLayoutY(76);
+        pointNum.setText(Integer.toString(firstUserPoint));
+
+        Text pointNum1 = new Text();
+        pointNum1.setTextAlignment(TextAlignment.CENTER);
+        pointNum1.setLayoutX(246);
+        pointNum1.setLayoutY(76);
+        pointNum1.setText(Integer.toString(secondUserPoint));
+
+        resultPane.getChildren().addAll(result, pointNum, pointNum1);
+        resultPane.setFocusTraversable(false);
+        gameMenu.getGameLayout().getChildren().add(resultPane);
+        gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
     }
 }

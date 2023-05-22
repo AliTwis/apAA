@@ -17,15 +17,36 @@ public class TwoPlayerGameController extends GeneralGameController {
     }
 
     public void lose(Level level, User... users) {
+        endGame(level, users);
+    }
 
+    public void win(Level level, User... users) {
+        endGame(level, users);
+    }
+
+    public void endGame(Level level, User... users) {
+        int winnerPoint, loserPoint;
+        String username = gameMenu.getGame().getPlayer().getUser().getUsername();
+        String username1 = gameMenu.getGame().getPlayer1().getUser().getUsername();
+        if (gameMenu.getGame().getPlayer().getUser().equals(users[0])) {
+            winnerPoint = level.getNumber() * 150 + gameMenu.getGame().getCurrentBall() * 10;
+            loserPoint = 7 * gameMenu.getGame().getCurrentBall1();
+            gameMenu.getGeneralGameController().showFinalResult2(winnerPoint, loserPoint, username, username1);
+        } else {
+            winnerPoint = level.getNumber() * 150 + gameMenu.getGame().getCurrentBall1() * 10;
+            loserPoint = 7 * gameMenu.getGame().getCurrentBall();
+            gameMenu.getGeneralGameController().showFinalResult2(loserPoint, winnerPoint, username, username1);
+        }
+        users[0].increaseScore(winnerPoint);
+        users[1].increaseScore(loserPoint);
+        User.updateUsers();
+        stopTimeLines();
+        System.out.println(gameMenu.getGame().getPlayer().getUser().getScore());
+        System.out.println(gameMenu.getGame().getPlayer1().getUser().getScore());//todo
     }
 
     @Override
     public void addBallToCenter(Ball currentBall) {
-
-    }
-
-    public void win(Level level, User... users) {
 
     }
 
@@ -42,10 +63,15 @@ public class TwoPlayerGameController extends GeneralGameController {
             if (currentBall.getBoundsInParent().intersects(ball.getBoundsInParent())) {
                 collision = true;
                 gameMenu.lose();
+                if (player.equals(gameMenu.getGame().getPlayer()))
+                    lose(Game.getLevel(),gameMenu.getGame().getPlayer1().getUser(), player.getUser());
+                else {
+                    lose(Game.getLevel(), gameMenu.getGame().getPlayer().getUser(), player.getUser());
+                }
             }
         }
 
-        if (!collision) {
+        if (!collision) {;
             TwoPlayerGameMenu.getGameController().increaseIceProgress();
             targetCircle.addBall(currentBall);
             if (player.equals(gameMenu.getGame().getPlayer())) {
@@ -57,6 +83,11 @@ public class TwoPlayerGameController extends GeneralGameController {
                     TwoPlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
                 else TwoPlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
 
+                if (player.getBalls().size() == 0) {
+                    gameMenu.win();
+                    win(Game.getLevel(), player.getUser(), gameMenu.getGame().getPlayer1().getUser());
+                }
+
             } else {
                 TwoPlayerGameMenu.getGameController().increaseScore1();
                 int currentBallsAmount = gameMenu.getGame().getCurrentBall();
@@ -65,6 +96,19 @@ public class TwoPlayerGameController extends GeneralGameController {
                 else if (Game.initialBallsAmount - currentBallsAmount <= 2)
                     TwoPlayerGameMenu.getGameController().decreaseBall1(Color.GREEN);
                 else TwoPlayerGameMenu.getGameController().decreaseBall1(Color.BLUE);
+                if (player.getBalls().size() == 0) {
+                    gameMenu.win();
+                    win(Game.getLevel(), player.getUser(), gameMenu.getGame().getPlayer().getUser());
+                }
+            }
+            System.out.println(player.getBalls().size());
+        }
+        else if (gameMenu.getGame().getPlayer().getBalls().size() == 0) {
+            gameMenu.lose();
+            if (player.equals(gameMenu.getGame().getPlayer()))
+                lose(Game.getLevel(),gameMenu.getGame().getPlayer1().getUser(), player.getUser());
+            else {
+                lose(Game.getLevel(), gameMenu.getGame().getPlayer().getUser(), player.getUser());
             }
         }
     }
