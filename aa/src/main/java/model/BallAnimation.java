@@ -20,6 +20,7 @@ public class BallAnimation extends GameTransitions {
         this.setCycleCount(-1);
         desiredDistance = centerBall.getRadius() + ball.getRadius() + 40;
     }
+
     @Override
     protected void interpolate(double v) {
         ball.setCenterY(ball.getCenterY() - ball.getySpeed());

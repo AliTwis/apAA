@@ -31,7 +31,9 @@ public abstract class GeneralGameController {
     static GameMenusFunctions gameMenu;
 
     public abstract void win(Level level, User... users);
+
     public abstract void lose(Level level, User... users);
+
     public abstract void addBallToCenter(Ball currentBall);
 
     protected void changeDirectionPhase2() {
@@ -135,15 +137,16 @@ public abstract class GeneralGameController {
         else if (second == 0 && minute > 0) {
             second = 59;
             minute--;
-        }
-        else {
+        } else {
             gameMenu.lose();
             Timeline timeline = timelines.get("timer");
             timeline.stop();
             timelines.remove("timer");
         }
-        if (SinglePlayerGameMenu.getGameController() != null) SinglePlayerGameMenu.getGameController().setTime(minute + ":" + second);
-        if (TwoPlayerGameMenu.getGameController() != null) TwoPlayerGameMenu.getGameController().setTime(minute + ":" + second);
+        if (SinglePlayerGameMenu.getGameController() != null)
+            SinglePlayerGameMenu.getGameController().setTime(minute + ":" + second);
+        if (TwoPlayerGameMenu.getGameController() != null)
+            TwoPlayerGameMenu.getGameController().setTime(minute + ":" + second);
     }
 
     public void shoot(Pane gameLayout, Player player) {
@@ -152,7 +155,7 @@ public abstract class GeneralGameController {
         if (!Game.isMute()) mediaPlayer.play();
         LinkedList<Ball> balls = player.getBalls();
         Ball firstBall = balls.getFirst();
-        firstBall.setxSpeed((int)(10 * Math.sin(Math.toRadians(gameMenu.getWindAngle()))));
+        firstBall.setxSpeed((int) (10 * Math.sin(Math.toRadians(gameMenu.getWindAngle()))));
         firstBall.getBallAnimation().play();
         balls.removeFirst();
         if (balls.size() > 0) {
@@ -164,7 +167,8 @@ public abstract class GeneralGameController {
     }
 
     public void freeze() {
-        if (SinglePlayerGameMenu.getGameController() != null) SinglePlayerGameMenu.getGameController().setIceProgress(0);
+        if (SinglePlayerGameMenu.getGameController() != null)
+            SinglePlayerGameMenu.getGameController().setIceProgress(0);
         if (TwoPlayerGameMenu.getGameController() != null) TwoPlayerGameMenu.getGameController().setIceProgress(0);
         TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
         targetCircle.setRotationSpeed(targetCircle.getRotationSpeed() / 2);

@@ -3,7 +3,6 @@ package controller;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import model.*;
-import view.SinglePlayerGameMenu;
 import view.TwoPlayerGameMenu;
 
 import java.util.LinkedList;
@@ -12,7 +11,7 @@ public class TwoPlayerGameController extends GeneralGameController {
     TwoPlayerGameMenu gameMenu;
     private int currentPhase = 1;
 
-    public TwoPlayerGameController (TwoPlayerGameMenu gameMenu) {
+    public TwoPlayerGameController(TwoPlayerGameMenu gameMenu) {
         this.gameMenu = gameMenu;
         GeneralGameController.gameMenu = gameMenu;
     }
@@ -34,6 +33,7 @@ public class TwoPlayerGameController extends GeneralGameController {
     public void isOutOfGame(Ball ball) {
 
     }
+
     public void addBallToCenter(Ball currentBall, Player player) {
         TargetCircle targetCircle = gameMenu.getGame().getTargetCircle();
         LinkedList<Ball> balls = targetCircle.getBalls();
@@ -57,8 +57,7 @@ public class TwoPlayerGameController extends GeneralGameController {
                     TwoPlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
                 else TwoPlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
 
-            }
-            else {
+            } else {
                 TwoPlayerGameMenu.getGameController().increaseScore1();
                 int currentBallsAmount = gameMenu.getGame().getCurrentBall();
                 if (currentBallsAmount < Game.initialBallsAmount / 2)
@@ -75,8 +74,7 @@ public class TwoPlayerGameController extends GeneralGameController {
         if (player.equals(gameMenu.getGame().getPlayer())) {
             gameMenu.getGame().increaseCurrentBall();
             checkPhase(gameMenu.getGame().getCurrentBall());
-        }
-        else {
+        } else {
             gameMenu.getGame().increaseCurrentBall1();
             checkPhase(gameMenu.getGame().getCurrentBall1());
         }
@@ -84,17 +82,15 @@ public class TwoPlayerGameController extends GeneralGameController {
     }
 
     public void checkPhase(int current) {
-        int initial = gameMenu.getGame().getInitialBallsAmount();
+        int initial = Game.getInitialBallsAmount();
         if (current == initial / 4 && currentPhase == 1) {
             changeDirectionPhase2();
             changeBallsSizePhase2();
             currentPhase = 2;
-        }
-        else if (current == initial / 2 && currentPhase == 2) {
+        } else if (current == initial / 2 && currentPhase == 2) {
             changeVisibilityPhase3();
             currentPhase = 3;
-        }
-        else if (current == (initial * 3) / 4 && currentPhase == 3) {
+        } else if (current == (initial * 3) / 4 && currentPhase == 3) {
             gameMenu.setMovable(true);
             windActive = true;
             currentPhase = 4;

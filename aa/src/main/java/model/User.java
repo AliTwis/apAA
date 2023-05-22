@@ -1,21 +1,23 @@
 package model;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.lang.reflect.Type;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import java.util.*;
-
-import com.google.gson.*;
-import com.google.gson.reflect.TypeToken;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
 public class User implements Comparable<User> {
     private static ArrayList<User> users = new ArrayList<>();
-    private static String dataPath = "src/main/resources/users/users.json";
-    private static String backupData = "src/main/resources/users/backup.json";
+    private static final String dataPath = "src/main/resources/users/users.json";
+    private static final String backupData = "src/main/resources/users/backup.json";
     private String username;
     private String password;
     private String avatarAddress;
@@ -107,7 +109,8 @@ public class User implements Comparable<User> {
         builder.setPrettyPrinting();
         Gson gson = builder.create();
 
-        Type usersType = new TypeToken<ArrayList<User>>(){}.getType();
+        Type usersType = new TypeToken<ArrayList<User>>() {
+        }.getType();
 
         ArrayList<User> tempUsers = gson.fromJson(save, usersType);
         if (tempUsers != null) users = tempUsers;

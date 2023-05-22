@@ -1,24 +1,16 @@
 package model;
 
-import javafx.animation.Animation;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
-import view.LoginMenu;
 
-import java.util.LinkedList;
-
-public class SinglePlayerGame extends Game{
+public class SinglePlayerGame extends Game {
     private Player player;
     private Stage stage;
     private int currentBall = 0;
 
     public SinglePlayerGame(User user, int ballsAmount, Stage stage, Pane gameLayout, Level level) {
-        this.initialBallsAmount = ballsAmount;
+        initialBallsAmount = ballsAmount;
         this.stage = stage;
         player = new Player(user);
         targetCircle = new TargetCircle(stage.getWidth() / 2, stage.getHeight() / 2, 100);

@@ -3,7 +3,6 @@ package model;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
@@ -12,11 +11,11 @@ import javafx.scene.transform.Rotate;
 public class Ball extends Circle {
     private double connectedAngle = -1;
     private Line line = new Line();
-    private Text text = new Text();
+    private final Text text = new Text();
     private int xSpeed = 0;
     private int ySpeed = 10;
     private BallAnimation ballAnimation;
-    private Rotate rotate;
+    private final Rotate rotate;
     private int number;
     private boolean smallBall = true;
 
@@ -30,8 +29,10 @@ public class Ball extends Circle {
         text.setText(Integer.toString(number));
         text.setX(v - 5);
         text.setY(v1 + 5);
-        if (isFirst) this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
-        else this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball2.png").toExternalForm())));
+        if (isFirst)
+            this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball1.png").toExternalForm())));
+        else
+            this.setFill(new ImagePattern(new Image(Ball.class.getResource("/images/game/ball2.png").toExternalForm())));
         rotate = new Rotate();
         rotate.setPivotX(center.getCenterX());
         rotate.setPivotY(center.getCenterY());
@@ -45,7 +46,6 @@ public class Ball extends Circle {
         line.setVisible(false);
         text.setVisible(false);
     }
-
 
 
     public boolean isSmallBall() {

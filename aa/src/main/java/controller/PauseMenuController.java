@@ -2,9 +2,9 @@ package controller;
 
 import javafx.event.ActionEvent;
 import view.GameMenusFunctions;
-import view.SinglePlayerGameMenu;
 import view.LoginMenu;
 import view.MainMenu;
+import view.SinglePlayerGameMenu;
 
 import java.io.IOException;
 
@@ -31,7 +31,7 @@ public class PauseMenuController {
         GuideFXController.showGuide(gameMenu.getGameLayout(), gameMenu.getScene());
     }
 
-    public void restart(ActionEvent actionEvent) throws Exception{
+    public void restart(ActionEvent actionEvent) throws Exception {
         new SinglePlayerGameMenu(gameMenu.getUser()).start(LoginMenu.gameStage);
     }
 

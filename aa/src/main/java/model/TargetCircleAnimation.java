@@ -1,10 +1,9 @@
 package model;
 
-import javafx.animation.Transition;
 import javafx.util.Duration;
 
 public class TargetCircleAnimation extends GameTransitions {
-    private TargetCircle targetCircle;
+    private final TargetCircle targetCircle;
 
     public TargetCircleAnimation(TargetCircle targetCircle) {
         super.addTransition(this);

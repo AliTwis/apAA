@@ -36,7 +36,7 @@ public class MainMenuFXController {
                 try {
                     new MainMenu(user).start(LoginMenu.gameStage);
                 } catch (Exception e) {
-                    System.out.println("problem happened in main menu line 28.");;
+                    System.out.println("problem happened in main menu line 28.");
                 }
             }
         });

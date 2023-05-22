@@ -8,8 +8,9 @@ public enum SuccessfulResponses {
     GAME_FINISHED("You finished the game!"),
     GAME_LOST("You lost:)"),
     ;
-    private String output;
-    SuccessfulResponses (String output) {
+    private final String output;
+
+    SuccessfulResponses(String output) {
         this.output = output;
     }
 

@@ -1,8 +1,8 @@
 package view;
 
-import controller.SinglePlayerGameController;
 import controller.PauseMenuController;
 import controller.SinglePlayerFXController;
+import controller.SinglePlayerGameController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,18 +10,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.*;
 
 import java.io.IOException;
 
-public class SinglePlayerGameMenu extends Application implements GameMenusFunctions{
+public class SinglePlayerGameMenu extends Application implements GameMenusFunctions {
     private Stage gameStage;
-    private User user;
-    private Pane pauseLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/pause.fxml"));
-    private Pane gameLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));;
-    private Pane wholeLayout = new Pane();
+    private final User user;
+    private final Pane pauseLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/pause.fxml"));
+    private final Pane gameLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/singlePlayerGame.fxml"));
+    private final Pane wholeLayout = new Pane();
     private Scene scene;
     SinglePlayerGame game;
     private boolean paused = false;
@@ -33,7 +33,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
         this.user = user;
     }
 
-    private SinglePlayerGameController generalGameController = new SinglePlayerGameController(this);
+    private final SinglePlayerGameController generalGameController = new SinglePlayerGameController(this);
 
     public static SinglePlayerFXController getGameController() {
         return gameController;
@@ -101,13 +101,11 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
-                }
-                else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
+                } else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
                     if (gameController.getIceProgress() > 0.95) {
                         generalGameController.freeze();
                     }
-                }
-                else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
+                } else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
                     if (paused) {
                         generalGameController.startTimeLines();
                         gameLayout.getChildren().remove(pauseLayout);
@@ -123,13 +121,9 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
                         pauseLayout.setFocusTraversable(false);
                         paused = true;
                     }
-                }
-
-                else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
+                } else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
                     generalGameController.moveLeftPlayer();
-                }
-
-                else if (keyEvent.getCode().equals(KeyCode.RIGHT) && movable) {
+                } else if (keyEvent.getCode().equals(KeyCode.RIGHT) && movable) {
                     generalGameController.moveRightPlayer();
                 }
             }

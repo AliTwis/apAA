@@ -8,7 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
 
-import static controller.Enums.SuccessfulResponses.*;
+import static controller.Enums.SuccessfulResponses.LOGIN;
+import static controller.Enums.SuccessfulResponses.REGISTER;
 
 public class LoginMenuFXController {
     public TextField username;

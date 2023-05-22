@@ -1,16 +1,16 @@
 package model;
 
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class TwoPlayerGame extends Game{
+public class TwoPlayerGame extends Game {
     private Player player, player1;
     private Stage stage;
     private int currentBall = 0, currentBall1 = 0;
     private TargetCircle targetCircle;
+
     public TwoPlayerGame(User user, User user1, int ballsAmount, Stage stage, Pane gameLayout, Level level) {
-        this.initialBallsAmount = ballsAmount;
+        initialBallsAmount = ballsAmount;
         this.stage = stage;
         player = new Player(user);
         player1 = new Player(user1);
@@ -38,6 +38,7 @@ public class TwoPlayerGame extends Game{
     public void increaseCurrentBall() {
         currentBall++;
     }
+
     public void increaseCurrentBall1() {
         currentBall1++;
     }

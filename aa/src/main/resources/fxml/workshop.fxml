@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="view.WorkshopController"
@@ -13,7 +11,7 @@
     <center>
         <VBox alignment="CENTER">
             <TextField maxWidth="100" promptText="enter your stupid name:"/>
-            <Button text="hello boi" onMouseClicked="#helloBoi" style="-fx-font-size: 50;" />
+            <Button text="hello boi" onMouseClicked="#helloBoi" style="-fx-font-size: 50;"/>
         </VBox>
     </center>
 </BorderPane>

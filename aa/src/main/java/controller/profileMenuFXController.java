@@ -9,13 +9,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.User;
-import view.*;
+import view.AvatarMenu;
+import view.LoginMenu;
+import view.MainMenu;
+import view.Output;
 
 public class profileMenuFXController {
     public ImageView avatar;
     public Text usernameText;
-    public Button usernameButton, passwordButton, avatarButton, logoutButton, deleteAccountButton;
-    private User user = MainMenu.user;
+    public Button usernameButton, passwordButton, avatarButton, logoutButton, deleteAccountButton, back;
+    private final User user = MainMenu.user;
 
     public void changeUsername(ActionEvent actionEvent) {
         ProfileMenuController.setupChanges(true);
@@ -41,6 +44,7 @@ public class profileMenuFXController {
         avatarButton.setText(Output.CHANGE_AVATAR.getOutput());
         logoutButton.setText(Output.LOGOUT.getOutput());
         deleteAccountButton.setText(Output.DELETE_ACCOUNT.getOutput());
+        back.setText(Output.BACK.getOutput());
 
         avatar.setImage(new Image(user.getAvatarAddress()));
         usernameText.setText(user.getUsername());
@@ -50,7 +54,7 @@ public class profileMenuFXController {
         new LoginMenu().start(LoginMenu.gameStage);
     }
 
-    public void deleteAccount(ActionEvent actionEvent) throws Exception{
+    public void deleteAccount(ActionEvent actionEvent) throws Exception {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("Are you sure you want to delete your account?");
         alert.showAndWait();

@@ -1,6 +1,8 @@
 package view;
 
-import controller.*;
+import controller.PauseMenuController;
+import controller.TwoPlayerFXController;
+import controller.TwoPlayerGameController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -14,12 +16,12 @@ import model.*;
 
 import java.io.IOException;
 
-public class TwoPlayerGameMenu extends Application implements GameMenusFunctions{
+public class TwoPlayerGameMenu extends Application implements GameMenusFunctions {
     private Stage gameStage;
     private User user, user1;
-    private Pane pauseLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/pause.fxml"));
-    private Pane gameLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/twoPlayerGame.fxml"));;
-    private Pane wholeLayout = new Pane();
+    private final Pane pauseLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/pause.fxml"));
+    private final Pane gameLayout = FXMLLoader.load(SinglePlayerGameMenu.class.getResource("/fxml/twoPlayerGame.fxml"));
+    private final Pane wholeLayout = new Pane();
     private Scene scene;
     TwoPlayerGame game;
     private boolean paused = false;
@@ -36,7 +38,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         this.user1 = user1;*/
     }
 
-    private TwoPlayerGameController generalGameController = new TwoPlayerGameController(this);
+    private final TwoPlayerGameController generalGameController = new TwoPlayerGameController(this);
 
     public static TwoPlayerFXController getGameController() {
         return gameController;
@@ -68,7 +70,9 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     }
 
     public Stage getGameStage() {
-        return gameStage;}
+        return gameStage;
+    }
+
     public Pane getPauseLayout() {
         return pauseLayout;
     }
@@ -100,7 +104,8 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     @Override
     public void start(Stage stage) throws Exception {
         //testing
-        user = new User("ali", ""); user1 = new User("mohmmmad", "");
+        user = new User("ali", "");
+        user1 = new User("mohmmmad", "");
         //
         gameStage = stage;
         wholeLayout.getChildren().add(gameLayout);
@@ -131,16 +136,13 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
             public void handle(KeyEvent keyEvent) {
                 if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
-                }
-                else if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot2"))) {
+                } else if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot2"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer1());
-                }
-                else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
+                } else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
                     if (gameController.getIceProgress() > 0.95) {
                         generalGameController.freeze();
                     }
-                }
-                else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
+                } else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
                     if (paused) {
                         generalGameController.startTimeLines();
                         gameLayout.getChildren().remove(pauseLayout);
@@ -156,13 +158,9 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
                         pauseLayout.setFocusTraversable(false);
                         paused = true;
                     }
-                }
-
-                else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
+                } else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
 //                    generalGameController.moveLeft();
-                }
-
-                else if (keyEvent.getCode().equals(KeyCode.RIGHT) && movable) {
+                } else if (keyEvent.getCode().equals(KeyCode.RIGHT) && movable) {
 //                    generalGameController.moveRight();
                 }
             }

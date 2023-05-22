@@ -1,17 +1,11 @@
 package controller;
 
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
@@ -19,7 +13,6 @@ import model.*;
 import view.*;
 
 import java.util.LinkedList;
-import java.util.Random;
 
 public class SinglePlayerGameController extends GeneralGameController {
     SinglePlayerGameMenu gameMenu;
@@ -30,15 +23,13 @@ public class SinglePlayerGameController extends GeneralGameController {
     }
 
     public void checkPhase(int current) {
-        int initial = gameMenu.getGame().getInitialBallsAmount();
+        int initial = Game.getInitialBallsAmount();
         if (current == initial / 4) {
             changeDirectionPhase2();
             changeBallsSizePhase2();
-        }
-        else if (current == initial / 2) {
+        } else if (current == initial / 2) {
             changeVisibilityPhase3();
-        }
-        else if (current ==((initial / 4) * 3)) {
+        } else if (current == ((initial / 4) * 3)) {
             changeWindPhase4();
             gameMenu.setMovable(true);
         }
@@ -60,8 +51,10 @@ public class SinglePlayerGameController extends GeneralGameController {
             SinglePlayerGameMenu.getGameController().increaseScore();
             SinglePlayerGameMenu.getGameController().increaseIceProgress();
             int currentBallsAmount = gameMenu.getGame().getCurrentBall();
-            if (currentBallsAmount < Game.initialBallsAmount / 2) SinglePlayerGameMenu.getGameController().decreaseBall(Color.RED);
-            else if (Game.initialBallsAmount - currentBallsAmount <= 2) SinglePlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
+            if (currentBallsAmount < Game.initialBallsAmount / 2)
+                SinglePlayerGameMenu.getGameController().decreaseBall(Color.RED);
+            else if (Game.initialBallsAmount - currentBallsAmount <= 2)
+                SinglePlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
             else SinglePlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
         }
 

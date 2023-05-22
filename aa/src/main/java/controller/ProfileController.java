@@ -2,8 +2,6 @@ package controller;
 
 import model.User;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -23,9 +21,7 @@ public class ProfileController {
     }
 
     private boolean checkPassword(String password) {
-        if (password.length() < 4 || !password.matches(".*[a-z].*") || !password.matches(".*[A-Z].*"))
-            return false;
-        return true;
+        return password.length() >= 4 && password.matches(".*[a-z].*") && password.matches(".*[A-Z].*");
     }
 
     public String login(String username, String password) {

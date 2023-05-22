@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class ProfileMenu extends Application {
     private Pane menuLayout;
     private Scene scene;
+
     @Override
     public void start(Stage stage) throws Exception {
         ProfileMenuController.setProfileMenu(this);

@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class TargetCircle extends Circle {
     private double currentAngle = 0;
     private double rotationSpeed = 2.4;//easy:1.8 medium:2.4 hard:3
-    private TargetCircleAnimation animation = new TargetCircleAnimation(this);
+    private final TargetCircleAnimation animation = new TargetCircleAnimation(this);
     private LinkedList<Ball> balls = new LinkedList<>();
     private String imageAddress = "/images/game/monster4.png";
 
@@ -39,8 +39,7 @@ public class TargetCircle extends Circle {
                 balls.addLast(mapBall);
 
             }
-        }
-        else if (mapNumber == 2) {
+        } else if (mapNumber == 2) {
             for (int i = 0; i < 6; i++) {
                 Ball mapBall = new Ball(
                         getCenterX() + desiredDistance * Math.sin(Math.toRadians(360 / 6 * i)),
@@ -57,9 +56,7 @@ public class TargetCircle extends Circle {
                 balls.addLast(mapBall);
 
             }
-        }
-
-        else if (mapNumber == 3) {
+        } else if (mapNumber == 3) {
             for (int i = 0; i < 5; i++) {
                 Ball mapBall = new Ball(
                         getCenterX() + desiredDistance * Math.sin(Math.toRadians(90 / 5 * i)),

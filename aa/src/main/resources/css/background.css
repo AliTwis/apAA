@@ -29,7 +29,7 @@ Button {
     color: #0F1111;
 }
 
-Label, RadioButton, CheckBox{
+Label, RadioButton, CheckBox {
     -fx-text-fill: yellow;
 }
 

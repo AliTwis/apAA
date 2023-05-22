@@ -25,11 +25,11 @@ public enum Output {
     LOGOUT("logout", "خروج از حساب کاربری"),
     DELETE_ACCOUNT("delete account", "حذف حساب کاربری"),
     ;
-    private String english;
-    private String persian;
+    private final String english;
+    private final String persian;
     private static boolean isEnglish = false;
 
-    Output (String english, String persian) {
+    Output(String english, String persian) {
         this.english = english;
         this.persian = persian;
     }

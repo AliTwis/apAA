@@ -6,7 +6,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import model.Game;
-import model.GameFXController;
 import view.TwoPlayerGameMenu;
 
 import java.net.URL;

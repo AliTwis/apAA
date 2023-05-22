@@ -29,7 +29,7 @@ public class ProfileMenuController {
         int width = 250;
         int height = 150;
         usernamePane.setPrefSize(width, height);
-        usernamePane.setLayoutX((profileMenu.getMenuLayout().getWidth() - width )/ 2);
+        usernamePane.setLayoutX((profileMenu.getMenuLayout().getWidth() - width) / 2);
         usernamePane.setLayoutY((profileMenu.getMenuLayout().getHeight() - height) / 2);
         usernamePane.setStyle("-fx-background-color: 'grey';");
         Text text = new Text();
@@ -37,8 +37,7 @@ public class ProfileMenuController {
         if (changeUsername) {
             text.setText("Enter your new username:");
             textField.setPromptText("username");
-        }
-        else {
+        } else {
             text.setText("Enter your new password:");
             textField.setPromptText("password");
         }
@@ -66,8 +65,7 @@ public class ProfileMenuController {
                 if (changeUsername) {
                     output = profileController.changeUsername(newUsername, user);
                     goodResponse = SuccessfulResponses.CHANGE_USERNAME.getOutput();
-                }
-                else {
+                } else {
                     output = profileController.changePassword(newUsername, user);
                     goodResponse = SuccessfulResponses.CHANGE_PASSWORD.getOutput();
                 }

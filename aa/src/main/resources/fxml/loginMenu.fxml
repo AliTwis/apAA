@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-
-<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.LoginMenuFXController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/background.css"
+            xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="view.LoginMenuFXController">
     <center>
         <VBox alignment="CENTER" spacing="5">
-            <TextField fx:id="username" maxWidth="200" promptText="username" />
-            <PasswordField fx:id="password" maxWidth="200" promptText="password" />
+            <TextField fx:id="username" maxWidth="200" promptText="username"/>
+            <PasswordField fx:id="password" maxWidth="200" promptText="password"/>
             <HBox alignment="CENTER" spacing="2">
-                <Button fx:id="login" onAction="#login" text="login" />
-                <Button fx:id="register" onAction="#register" text="register" />
-                <Button fx:id="guest" onAction="#enterAsGuest" text="Guest" />
+                <Button fx:id="login" onAction="#login" text="login"/>
+                <Button fx:id="register" onAction="#register" text="register"/>
+                <Button fx:id="guest" onAction="#enterAsGuest" text="Guest"/>
             </HBox>
         </VBox>
     </center>

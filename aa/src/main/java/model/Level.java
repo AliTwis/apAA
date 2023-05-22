@@ -5,11 +5,12 @@ public enum Level {
     TWO(1.2, 2, 5000, 2.4),
     THREE(1.5, 3, 3000, 3),
     ;
-    private int number;
-    private int iceTime;
-    private double rotationSpeed;
+    private final int number;
+    private final int iceTime;
+    private final double rotationSpeed;
     private double windPower;
-    Level (double windPower, int number, int iceTime, double rotationSpeed) {
+
+    Level(double windPower, int number, int iceTime, double rotationSpeed) {
         this.iceTime = iceTime;
         this.rotationSpeed = rotationSpeed;
         this.number = number;

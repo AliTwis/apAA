@@ -10,7 +10,7 @@ import view.SinglePlayerGameMenu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SinglePlayerFXController extends GameFXController implements Initializable{
+public class SinglePlayerFXController extends GameFXController implements Initializable {
     public Text username;
     public Text level;
     public Text score;
