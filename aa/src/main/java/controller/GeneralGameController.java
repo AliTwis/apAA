@@ -36,28 +36,44 @@ public abstract class GeneralGameController {
 
     public abstract void addBallToCenter(Ball currentBall);
 
-    protected void changeDirectionPhase2() {
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
+
+    public int getSecond() {
+        return second;
+    }
+
+    public void setSecond(int second) {
+        this.second = second;
+    }
+
+    public void changeDirectionPhase2() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(4500), this::changeDirection));
         timeline.setCycleCount(-1);
         timeline.play();
         timelines.put("change direction", timeline);
     }
 
-    protected void changeBallsSizePhase2() {
+    public void changeBallsSizePhase2() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), this::changeBallsSize));
         timeline.setCycleCount(-1);
         timeline.play();
         timelines.put("change ball size", timeline);
     }
 
-    protected void changeVisibilityPhase3() {
+    public void changeVisibilityPhase3() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), this::changeVisibility));
         timeline.setCycleCount(-1);
         timeline.play();
         timelines.put("change visibility", timeline);
     }
 
-    protected void changeWindPhase4() {
+    public void changeWindPhase4() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e ->
                 gameMenu.setWindAngle((int) ((new Random().nextInt(60) - 15) * Game.getLevel().getWindPower()))
         ));

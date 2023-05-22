@@ -46,7 +46,7 @@ public class SinglePlayerFXController extends GameFXController implements Initia
         score.setText(Integer.toString(Integer.parseInt(score.getText()) + eachPoint));
     }
 
-    public void setIceProgress(int iceProgress) {
+    public void setIceProgress(double iceProgress) {
         ice.setProgress(iceProgress);
     }
 
@@ -81,6 +81,34 @@ public class SinglePlayerFXController extends GameFXController implements Initia
         return eachPoint;
     }
 
+    public Text getUsername() {
+        return username;
+    }
+
+    public Text getLevel() {
+        return level;
+    }
+
+    public Text getScore() {
+        return score;
+    }
+
+    public Text getWind() {
+        return wind;
+    }
+
+    public Text getBallsAmount() {
+        return ballsAmount;
+    }
+
+    public ProgressBar getIce() {
+        return ice;
+    }
+
+    public Text getTime() {
+        return time;
+    }
+
     public void setEachPoint(int eachPoint) {
         this.eachPoint = eachPoint;
     }
@@ -99,6 +127,7 @@ public class SinglePlayerFXController extends GameFXController implements Initia
 
     public void setBallsLeft(int ballsLeft) {
         this.ballsLeft = ballsLeft;
+        ballsAmount.setText(Integer.toString(ballsLeft));
     }
 
     public static Color getBallsAmountColor() {

@@ -26,6 +26,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     SinglePlayerGame game;
     private boolean paused = false;
     private boolean movable = false;
+    private boolean savedGame = true;
     private int windAngle = 0;
     private static SinglePlayerFXController gameController;
 
@@ -41,6 +42,14 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
 
     public static void setGameController(SinglePlayerFXController gameController) {
         SinglePlayerGameMenu.gameController = gameController;
+    }
+
+    public boolean isSavedGame() {
+        return savedGame;
+    }
+
+    public void setSavedGame(boolean savedGame) {
+        this.savedGame = savedGame;
     }
 
     public int getWindAngle() {
@@ -72,12 +81,21 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
         this.paused = paused;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public boolean isMovable() {
+        return movable;
+    }
+
     public SinglePlayerGameController getGeneralGameController() {
         return generalGameController;
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+        SinglePlayerGameMenu gameMenu = this;
         gameStage = stage;
         wholeLayout.getChildren().add(gameLayout);
         //initialize game
@@ -91,7 +109,10 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
         gameController.setWind(0);
         gameController.setLevel("level " + Game.getLevel().getNumber());
         gameController.setScore(0);
-        game = new SinglePlayerGame(null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
+        if (!isSavedGame()) game = new SinglePlayerGame(null, Game.getInitialBallsAmount(), stage, gameLayout, Game.getLevel());
+        else {
+            game = GameSaver.loadSavedGame(this);
+        }
         for (Ball ball : game.getPlayer().getBalls()) {
             ball.setBallAnimation(new BallAnimation(ball, game.getTargetCircle(), generalGameController));
         }
@@ -106,13 +127,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
                         generalGameController.freeze();
                     }
                 } else if (keyEvent.getCode().equals(Game.getGameKeys().get("pause"))) {
-                    if (paused) {
-                        generalGameController.startTimeLines();
-                        gameLayout.getChildren().remove(pauseLayout);
-                        game.getTargetCircle().getAnimation().play();
-                        gameLayout.setOpacity(1);
-                        paused = false;
-                    } else {
+                    if (!paused) {
                         generalGameController.stopTimeLines();
                         GameTransitions.stopTransitions();
                         gameLayout.getChildren().add(pauseLayout);
@@ -120,6 +135,12 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
                         pauseLayout.setLayoutY((pauseLayout.getHeight()) / 2);
                         pauseLayout.setFocusTraversable(false);
                         paused = true;
+                    } else {
+                        generalGameController.startTimeLines();
+                        gameLayout.getChildren().remove(pauseLayout);
+                        game.getTargetCircle().getAnimation().play();
+                        gameLayout.setOpacity(1);
+                        paused = false;
                     }
                 } else if (keyEvent.getCode().equals(KeyCode.LEFT) && movable) {
                     generalGameController.moveLeftPlayer();
@@ -146,6 +167,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     }
 
     public void lose() {
+        GameSaver.saveGame(this);
         GameTransitions.stopTransitions();
         for (Ball ball : game.getTargetCircle().getBalls()) {
             ball.setVisible(true);
