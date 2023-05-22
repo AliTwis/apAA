@@ -41,8 +41,6 @@ public class TwoPlayerGameController extends GeneralGameController {
         users[1].increaseScore(loserPoint);
         User.updateUsers();
         stopTimeLines();
-        System.out.println(gameMenu.getGame().getPlayer().getUser().getScore());
-        System.out.println(gameMenu.getGame().getPlayer1().getUser().getScore());//todo
     }
 
     @Override
@@ -101,7 +99,6 @@ public class TwoPlayerGameController extends GeneralGameController {
                     win(Game.getLevel(), player.getUser(), gameMenu.getGame().getPlayer().getUser());
                 }
             }
-            System.out.println(player.getBalls().size());
         }
         else if (gameMenu.getGame().getPlayer().getBalls().size() == 0) {
             gameMenu.lose();
@@ -122,7 +119,6 @@ public class TwoPlayerGameController extends GeneralGameController {
             gameMenu.getGame().increaseCurrentBall1();
             checkPhase(gameMenu.getGame().getCurrentBall1());
         }
-        //todo
     }
 
     public void checkPhase(int current) {

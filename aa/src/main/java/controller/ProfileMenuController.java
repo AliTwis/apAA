@@ -11,6 +11,7 @@ import javafx.scene.text.Text;
 import model.User;
 import view.LoginMenu;
 import view.MainMenu;
+import view.MainMenuFXController;
 import view.ProfileMenu;
 
 public class ProfileMenuController {
@@ -42,15 +43,7 @@ public class ProfileMenuController {
             textField.setPromptText("password");
         }
         Button saveButton = new Button("Save");
-        Button cancelButton = new Button("Cancel");
-        text.setLayoutX(40);
-        text.setLayoutY(45);
-        textField.setLayoutX(40);
-        textField.setLayoutY(63);
-        saveButton.setLayoutX(61);
-        saveButton.setLayoutY(105);
-        cancelButton.setLayoutX(135);
-        cancelButton.setLayoutY(105);
+        Button cancelButton = MainMenuFXController.addCancelButton(text, textField, saveButton);
         usernamePane.getChildren().addAll(text, textField, saveButton, cancelButton);
         profileMenu.getMenuLayout().getChildren().add(usernamePane);
         profileMenu.getMenuLayout().setMaxWidth(profileMenu.getMenuLayout().getWidth());

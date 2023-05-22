@@ -22,6 +22,7 @@
 }
 
 Button {
+    -fx-background-radius: 7px;
     -fx-background-color: #FFD814;
     -fx-border-color: 1px solid #FCD200;
     -fx-background-size: 11px;
@@ -80,4 +81,8 @@ TextField, PasswordField {
 
 .win {
     -fx-background-color: #24e324;
+}
+
+.chooseSecondPlayer {
+    -fx-text-fill: white;
 }

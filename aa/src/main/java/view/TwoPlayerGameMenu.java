@@ -33,9 +33,9 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         TwoPlayerGameMenu.gameController = gameController;
     }
 
-    public TwoPlayerGameMenu(/*User user, User user1*/) throws IOException {
-        /*this.user = user;
-        this.user1 = user1;*/
+    public TwoPlayerGameMenu(User user, User user1) throws IOException {
+        this.user = user;
+        this.user1 = user1;
     }
 
     private final TwoPlayerGameController generalGameController = new TwoPlayerGameController(this);
@@ -43,10 +43,6 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     public static TwoPlayerFXController getGameController() {
         return gameController;
     }
-
-//    public static void setGameController(SinglePlayerFXController gameController) {
-//        SinglePlayerGameMenu.gameController = gameController;
-//    }
 
     public static void main(String[] args) {
         launch(args);
@@ -103,10 +99,6 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
 
     @Override
     public void start(Stage stage) throws Exception {
-        //testing
-        user = new User("aliReza", "");
-        user1 = new User("mohammad", "");
-        //
         gameStage = stage;
         wholeLayout.getChildren().add(gameLayout);
         //initialize game

@@ -29,8 +29,8 @@ public class TwoPlayerFXController extends SinglePlayerFXController implements I
     }
 
     public void setUsernames(String name, String name1) {
-        username1.setText(name);
-        username2.setText(name1);
+        username2.setText(name);
+        username1.setText(name1);
     }
 
     public void setScore1(int scoreString) {

@@ -6,11 +6,15 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import model.User;
 
@@ -19,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainMenuFXController {
     public ImageView profileImage;
-    public Button newGame, loadGame, scoreboard, setting, exit;
+    public Button newGame, loadGame, twoPlayer, scoreboard, setting, exit;
 
     public static void generalShowScoreboard(ActionEvent actionEvent) {
         LoginMenu.gameStage.setHeight(400);
@@ -96,5 +100,74 @@ public class MainMenuFXController {
         SinglePlayerGameMenu gameMenu = new SinglePlayerGameMenu(MainMenu.user);
         gameMenu.setSavedGame(true);
         gameMenu.start(LoginMenu.gameStage);
+    }
+
+    public void startTwoPlayerGame(ActionEvent actionEvent) {
+        Pane newGamePane = new Pane();
+        MainMenu mainMenu = MainMenu.getMainMenu();
+        Pane pane = MainMenu.getMainMenu().getPane();
+        int width = 250;
+        int height = 150;
+        newGamePane.setPrefSize(width, height);
+        newGamePane.setLayoutX((pane.getWidth() - width) / 2);
+        newGamePane.setLayoutY((pane.getHeight() - height) / 2);
+        newGamePane.setStyle("-fx-background-color: 'black';");
+        Text text = new Text();
+        TextField textField = new TextField();
+        textField.getStyleClass().add("chooseSecondPlayer");
+        text.setText("Enter your enemy's username");
+        textField.setPromptText(Output.USERNAME.getOutput());
+        Button acceptButton = new Button("Accept");
+        Button cancelButton = addCancelButton(text, textField, acceptButton);;
+        acceptButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                User enemy = User.getUserByName(textField.getText());
+                if (enemy == null) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("There is no user with this username.");
+                    alert.showAndWait();
+                }
+                else if (enemy.equals(MainMenu.user)) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("You can't play with yourself!");
+                    alert.showAndWait();
+                }
+                else {
+                    try {
+                        new TwoPlayerGameMenu(MainMenu.user, enemy).start(LoginMenu.gameStage);
+                    } catch (Exception e) {
+                        System.out.println("Couldn't start a new game with that player.");
+                    }
+                }
+            }
+        });
+        cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    pane.getChildren().remove(newGamePane);
+                    new MainMenu(MainMenu.user).start(LoginMenu.gameStage);
+                } catch (Exception e) {
+                    System.out.println("pain");
+                }
+            }
+        });
+        newGamePane.getChildren().addAll(text, textField, acceptButton, cancelButton);
+        pane.getChildren().add(newGamePane);
+    }
+
+    public static Button addCancelButton(Text text, TextField textField, Button acceptButton) {
+        Button cancelButton = new Button("Cancel");
+        text.setLayoutX(20);
+        text.setLayoutY(45);
+        textField.setLayoutX(70);
+        textField.setLayoutY(63);
+        textField.setAlignment(Pos.CENTER);
+        acceptButton.setLayoutX(61);
+        acceptButton.setLayoutY(105);
+        cancelButton.setLayoutX(135);
+        cancelButton.setLayoutY(105);
+        return cancelButton;
     }
 }
