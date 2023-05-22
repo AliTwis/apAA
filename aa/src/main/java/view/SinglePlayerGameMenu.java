@@ -26,7 +26,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     SinglePlayerGame game;
     private boolean paused = false;
     private boolean movable = false;
-    private boolean savedGame = true;
+    private boolean savedGame = false;
     private int windAngle = 0;
     private static SinglePlayerFXController gameController;
 
@@ -51,6 +51,8 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     public void setSavedGame(boolean savedGame) {
         this.savedGame = savedGame;
     }
+
+
 
     public int getWindAngle() {
         return windAngle;
@@ -134,6 +136,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
                         pauseLayout.setLayoutX(25);
                         pauseLayout.setLayoutY((pauseLayout.getHeight()) / 2);
                         pauseLayout.setFocusTraversable(false);
+                        gameLayout.setOpacity(0.9);
                         paused = true;
                     } else {
                         generalGameController.startTimeLines();
@@ -167,7 +170,6 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     }
 
     public void lose() {
-        GameSaver.saveGame(this);
         GameTransitions.stopTransitions();
         for (Ball ball : game.getTargetCircle().getBalls()) {
             ball.setVisible(true);

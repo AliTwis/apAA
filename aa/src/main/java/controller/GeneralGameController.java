@@ -166,6 +166,7 @@ public abstract class GeneralGameController {
     }
 
     public void shoot(Pane gameLayout, Player player) {
+        if (player.getBalls().size() <= 0) return;
         mediaPlayer = new MediaPlayer(new Media(SinglePlayerGameMenu.class.getResource("/sound/affects/shootSoundAffect.mp3").toExternalForm()));
         mediaPlayer.setVolume(1);
         if (!Game.isMute()) mediaPlayer.play();
@@ -177,8 +178,6 @@ public abstract class GeneralGameController {
         if (balls.size() > 0) {
             gameLayout.getChildren().addAll(balls.getFirst(), balls.getFirst().getText());
             balls.getFirst().getText().setVisible(true);
-        } else {
-            gameMenu.win();
         }
     }
 

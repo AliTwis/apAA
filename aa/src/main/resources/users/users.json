@@ -3,13 +3,14 @@
     "username": "ali",
     "password": "Ahmad",
     "avatarAddress": "file:/home/alitwis/Desktop/AP_2/apAA/aa/target/classes/images/avatars/3.png",
-    "score": 14733,
+    "savedGame": "{\"level\":2,\"ballsLeft\":2,\"score\":80,\"minute\":0,\"second\":57,\"currentBall\":8,\"paused\":true,\"movable\":true,\"initialBallsAmount\":10,\"progressBar\":1.0,\"targetCircleImageAddress\":\"/images/game/monster4.png\",\"angles\":[359.99999999999886,23.99999999999884,43.19999999999883,83.99999999999886,122.39999999999895,299.99999999999795,314.3999999999978,331.19999999999766],\"targetBallsNumbers\":[10,9,8,7,6,5,4,3],\"leftBallsNumbers\":[2,1]}",
+    "score": 16908,
     "lastUpdate": [
       2023,
       5,
       22,
-      18,
-      18
+      21,
+      0
     ]
   },
   {

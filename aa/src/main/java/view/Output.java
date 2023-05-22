@@ -7,6 +7,7 @@ public enum Output {
     REGISTER("register", "ساخت"),
     GUEST("guest", "مهمان"),
     NEW_GAME("New Game", "بازی جدید"),
+    LOAD_GAME("Continue previous game", "ادامه بازی فبلی"),
     SCOREBOARD("Scoreboard", "جدول امتیازات"),
     SETTING("Setting", "تنظیمات"),
     EXIT("Exit", "خروج"),

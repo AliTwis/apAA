@@ -14,6 +14,7 @@ public enum Level {
         this.iceTime = iceTime;
         this.rotationSpeed = rotationSpeed;
         this.number = number;
+        this.windPower = windPower;
     }
 
     public int getNumber() {

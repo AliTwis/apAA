@@ -21,6 +21,7 @@ public class User implements Comparable<User> {
     private String username;
     private String password;
     private String avatarAddress;
+    private String savedGame = null;
     private int score = 0;
     private int[] lastUpdate = {Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE, Integer.MAX_VALUE};
 
@@ -36,6 +37,14 @@ public class User implements Comparable<User> {
             if (user.username.equals(name)) return user;
         }
         return null;
+    }
+
+    public String getSavedGame() {
+        return savedGame;
+    }
+
+    public void setSavedGame(String savedGame) {
+        this.savedGame = savedGame;
     }
 
     public void updateTime() {

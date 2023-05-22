@@ -56,8 +56,9 @@ public class SinglePlayerGameController extends GeneralGameController {
             else if (Game.initialBallsAmount - currentBallsAmount <= 2)
                 SinglePlayerGameMenu.getGameController().decreaseBall(Color.GREEN);
             else SinglePlayerGameMenu.getGameController().decreaseBall(Color.BLUE);
+            if (gameMenu.getGame().getPlayer().getBalls().size() == 0) gameMenu.win();
         }
-
+        else if (gameMenu.getGame().getPlayer().getBalls().size() == 0) gameMenu.lose();
     }
 
     public void endingTransition() {

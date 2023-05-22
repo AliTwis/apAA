@@ -14,11 +14,12 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import model.User;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainMenuFXController {
     public ImageView profileImage;
-    public Button newGame, scoreboard, setting, exit;
+    public Button newGame, loadGame, scoreboard, setting, exit;
 
     public static void generalShowScoreboard(ActionEvent actionEvent) {
         LoginMenu.gameStage.setHeight(400);
@@ -72,6 +73,7 @@ public class MainMenuFXController {
     public void initialize() {
         profileImage.setImage(new Image(MainMenu.user.getAvatarAddress()));
         newGame.setText(Output.NEW_GAME.getOutput());
+        loadGame.setText(Output.LOAD_GAME.getOutput());
         scoreboard.setText(Output.SCOREBOARD.getOutput());
         setting.setText(Output.SETTING.getOutput());
         exit.setText(Output.EXIT.getOutput());
@@ -87,5 +89,12 @@ public class MainMenuFXController {
 
     public void showScoreboard(ActionEvent actionEvent) {
         generalShowScoreboard(actionEvent);
+    }
+
+    public void loadGame(ActionEvent actionEvent) throws Exception {
+        if (MainMenu.user.getSavedGame() == null) return;
+        SinglePlayerGameMenu gameMenu = new SinglePlayerGameMenu(MainMenu.user);
+        gameMenu.setSavedGame(true);
+        gameMenu.start(LoginMenu.gameStage);
     }
 }

@@ -50,16 +50,18 @@ public class GameSaver {
         return gson;
     }
 
-    public static void saveGame(SinglePlayerGameMenu gameMenu) {
+    public static void saveGame(SinglePlayerGameMenu gameMenu, User user) {
         GameSaver gameSaver = new GameSaver(gameMenu);
         Gson gson = getGson();
         String data = gson.toJson(gameSaver);
-        System.out.println(data);
-
+        user.setSavedGame(data);
+        User.updateUsers();
     }
 
     public static SinglePlayerGame loadSavedGame(SinglePlayerGameMenu gameMenu) throws IOException {
-        String data = "{\"level\":2,\"ballsLeft\":5,\"score\":50,\"minute\":1,\"second\":1,\"currentBall\":6,\"paused\":false,\"movable\":true,\"initialBallsAmount\":10,\"progressBar\":1.0,\"targetCircleImageAddress\":\"/images/game/monster4.png\",\"angles\":[266.4000000000003,323.9999999999998,16.79999999999941,59.99999999999939,122.39999999999895],\"targetBallsNumbers\":[10,9,8,7,6],\"leftBallsNumbers\":[4,3,2,1]}";
+        String data = MainMenu.user.getSavedGame();
+        MainMenu.user.setSavedGame(null);
+        User.updateUsers();
         Gson gson = getGson();
         GameSaver gameSaver = gson.fromJson(data, GameSaver.class);
         gameMenu.getGeneralGameController().setMinute(gameSaver.minute);
@@ -87,7 +89,6 @@ public class GameSaver {
         Game.setInitialBallsAmount(gameSaver.initialBallsAmount);
         SinglePlayerGame game = new SinglePlayerGame(MainMenu.user, gameSaver.ballsLeft, LoginMenu.gameStage, gameMenu.getGameLayout(), levelNum);
         game.setCurrentBall(gameSaver.currentBall);
-        System.out.println(gameSaver.currentBall);
         TargetCircle targetCircle = game.getTargetCircle();
         int desiredDistance = 155;
         for (int i = 0; i < gameSaver.angles.size(); i++) {

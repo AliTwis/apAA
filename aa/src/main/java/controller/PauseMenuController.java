@@ -1,6 +1,7 @@
 package controller;
 
 import javafx.event.ActionEvent;
+import model.GameSaver;
 import view.GameMenusFunctions;
 import view.LoginMenu;
 import view.MainMenu;
@@ -37,5 +38,12 @@ public class PauseMenuController {
 
     public void selectMusic(ActionEvent actionEvent) throws IOException {
         MusicFXController.selectMusic(gameMenu.getGameLayout());
+    }
+
+    public void save(ActionEvent actionEvent) throws Exception {
+        if (gameMenu instanceof SinglePlayerGameMenu) {
+            GameSaver.saveGame((SinglePlayerGameMenu) gameMenu, MainMenu.user);
+            new MainMenu(MainMenu.user).start(LoginMenu.gameStage);
+        }
     }
 }
