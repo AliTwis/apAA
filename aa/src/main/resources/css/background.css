@@ -29,7 +29,7 @@ Button {
     color: #0F1111;
 }
 
-Label, RadioButton, ChoiceBox{
+Label, RadioButton, CheckBox{
     -fx-text-fill: yellow;
 }
 
@@ -67,4 +67,12 @@ TextField, PasswordField {
 
 .shapeChoose:hover {
     -fx-opacity: 0.5;
+}
+
+.lose {
+    -fx-background-color: #de4242;
+}
+
+.win {
+    -fx-background-color: #24e324;
 }

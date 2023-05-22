@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane stylesheets="@../css/background.css" styleClass="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.profileMenuFXController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="root" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.profileMenuFXController">
    <children>
       <ImageView fx:id="avatar" fitHeight="150.0" fitWidth="158.0" layoutX="221.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" />
       <Text fx:id="usernameText" layoutX="258.0" layoutY="224.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="83.2294921875" />
@@ -15,23 +15,23 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="21.0" prefWidth="118.0" text="change password">
+      <Button fx:id="passwordButton" layoutX="241.0" layoutY="303.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="21.0" prefWidth="118.0" text="change password">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
       <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#back" text="Back" />
-      <Button layoutX="241.0" layoutY="271.0" mnemonicParsing="false" onAction="#changeAvatar" prefHeight="21.0" prefWidth="118.0" text="change avatar">
+      <Button fx:id="avatarButton" layoutX="241.0" layoutY="271.0" mnemonicParsing="false" onAction="#changeAvatar" prefHeight="21.0" prefWidth="118.0" text="change avatar">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="241.0" layoutY="333.0" mnemonicParsing="false" onAction="#logout" prefHeight="21.0" prefWidth="118.0" text="logout">
+      <Button fx:id="logoutButton" layoutX="241.0" layoutY="333.0" mnemonicParsing="false" onAction="#logout" prefHeight="21.0" prefWidth="118.0" text="logout">
          <font>
             <Font size="11.0" />
          </font>
       </Button>
-      <Button layoutX="241.0" layoutY="365.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="21.0" prefWidth="118.0" text="delete account">
+      <Button fx:id="deleteAccountButton" layoutX="241.0" layoutY="365.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="21.0" prefWidth="118.0" text="delete account">
          <font>
             <Font size="11.0" />
          </font>

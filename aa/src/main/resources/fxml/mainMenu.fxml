@@ -4,17 +4,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@../css/background.css" styleClass="root" alignment="TOP_RIGHT" prefHeight="400.0" prefWidth="600.0" spacing="50" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainMenuFXController">
+<VBox alignment="TOP_RIGHT" prefHeight="400.0" prefWidth="600.0" spacing="50" styleClass="root" stylesheets="@../css/background.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainMenuFXController">
    <Button alignment="CENTER" mnemonicParsing="false" onAction="#showProfileMenu" prefHeight="41.0" prefWidth="49.0" textAlignment="CENTER">
       <graphic>
-         <ImageView fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" fx:id="profileImage"/>
+         <ImageView fx:id="profileImage" fitHeight="43.0" fitWidth="43.0" pickOnBounds="true" preserveRatio="true" />
       </graphic>
    </Button>
     <VBox alignment="CENTER" spacing="20">
-        <Button alignment="CENTER" maxWidth="170" minWidth="170" text="new Game" onAction="#startNewGame"/>
-        <Button alignment="CENTER" maxWidth="170" minWidth="170" onAction="#showScoreboard" text="Scoreboard" />
-        <Button alignment="CENTER" maxWidth="170" minWidth="170" text="Setting" onAction="#showSettings" />
-        <Button alignment="CENTER" maxWidth="170" minWidth="170" onAction="#exit" text="Exit" />
+        <Button fx:id="newGame" alignment="CENTER" maxWidth="170" minWidth="170" onAction="#startNewGame" text="New Game" />
+        <Button fx:id="scoreboard" alignment="CENTER" maxWidth="170" minWidth="170" onAction="#showScoreboard" text="Scoreboard" />
+        <Button fx:id="setting" alignment="CENTER" maxWidth="170" minWidth="170" onAction="#showSettings" text="Setting" />
+        <Button fx:id="exit" alignment="CENTER" maxWidth="170" minWidth="170" onAction="#exit" text="Exit" />
     </VBox>
 
 </VBox>

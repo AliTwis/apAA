@@ -3,6 +3,7 @@ package view;
 import controller.ProfileController;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
@@ -13,6 +14,7 @@ public class LoginMenuFXController {
     public TextField username;
     public PasswordField password;
     private final ProfileController profileController = new ProfileController();
+    public Button login, register, guest;
 
     public void register(ActionEvent actionEvent) throws Exception {
         String response = profileController.register(username.getText(), password.getText());
@@ -44,5 +46,13 @@ public class LoginMenuFXController {
     }
 
     public void enterAsGuest(ActionEvent actionEvent) {
+    }
+
+    public void initialize() {
+        username.setPromptText(Output.USERNAME.getOutput());
+        password.setPromptText(Output.PASSWORD.getOutput());
+        register.setText(Output.REGISTER.getOutput());
+        login.setText(Output.LOGIN.getOutput());
+        guest.setText(Output.GUEST.getOutput());
     }
 }

@@ -3,10 +3,7 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -17,6 +14,7 @@ import model.Game;
 import model.Level;
 import view.LoginMenu;
 import view.MainMenu;
+import view.Output;
 
 import java.net.URL;
 import java.util.HashMap;
@@ -32,6 +30,11 @@ public class SettingsMenuFXController implements Initializable {
     public Circle firstMonster, secondMonster, thirdMonster;
     public Rectangle firstMap, secondMap, thirdMap, fourthMap;
     public CheckBox mute;
+    public Label setting;
+
+    public Button back;
+    public Label ballsAmountLabel, pickLevelLabel, firstShootLabel, secondShootLabel, freezeLabel, monsterLabel, mapLabel;
+    public CheckBox english;
 
     public void back(ActionEvent actionEvent) throws Exception {
         if (level1.isSelected()) Game.setLevel(Level.ONE);
@@ -47,11 +50,24 @@ public class SettingsMenuFXController implements Initializable {
         );
         Game.setMute(mute.isSelected());
         if (mute.isSelected()) LoginMenu.setMusic("none");
+        Output.setIsEnglish(english.isSelected());
         new MainMenu(MainMenu.user).start(LoginMenu.gameStage);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ballsAmountLabel.setText(Output.BALLS_AMOUNT.getOutput());
+        pickLevelLabel.setText(Output.PICK_LEVEL.getOutput());
+        firstShootLabel.setText(Output.FIRST_PLAYER_SHOOT.getOutput());
+        secondShootLabel.setText(Output.SECOND_PLAYER_SHOOT.getOutput());
+        freezeLabel.setText(Output.FREEZE.getOutput());
+        monsterLabel.setText(Output.MONSTER.getOutput());
+        mapLabel.setText(Output.MAP.getOutput());
+        mute.setText(Output.MUTE.getOutput());
+        back.setText(Output.BACK.getOutput());
+        setting.setText(Output.SETTING.getOutput());
+        english.setSelected(Output.isIsEnglish());
+
         mute.setSelected(Game.isMute());
         firstMonster.setFill(new ImagePattern(new Image(Game.class.getResource("/images/game/monster1.png").toExternalForm())));
         secondMonster.setFill(new ImagePattern(new Image(Game.class.getResource("/images/game/monster4.png").toExternalForm())));

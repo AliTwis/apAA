@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class MainMenuFXController {
     public ImageView profileImage;
+    public Button newGame, scoreboard, setting, exit;
 
     public static void generalShowScoreboard(ActionEvent actionEvent) {
         LoginMenu.gameStage.setHeight(400);
@@ -70,6 +71,10 @@ public class MainMenuFXController {
     @FXML
     public void initialize() {
         profileImage.setImage(new Image(MainMenu.user.getAvatarAddress()));
+        newGame.setText(Output.NEW_GAME.getOutput());
+        scoreboard.setText(Output.SCOREBOARD.getOutput());
+        setting.setText(Output.SETTING.getOutput());
+        exit.setText(Output.EXIT.getOutput());
     }
 
     public void showSettings(ActionEvent actionEvent) throws Exception {

@@ -3,19 +3,18 @@ package controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 import model.User;
-import view.AvatarMenu;
-import view.LoginMenu;
-import view.MainMenu;
-import view.ProfileMenu;
+import view.*;
 
 public class profileMenuFXController {
     public ImageView avatar;
     public Text usernameText;
+    public Button usernameButton, passwordButton, avatarButton, logoutButton, deleteAccountButton;
     private User user = MainMenu.user;
 
     public void changeUsername(ActionEvent actionEvent) {
@@ -37,6 +36,12 @@ public class profileMenuFXController {
 
     @FXML
     public void initialize() {
+        usernameButton.setText(Output.CHANGE_USERNAME.getOutput());
+        passwordButton.setText(Output.CHANGE_PASSWORD.getOutput());
+        avatarButton.setText(Output.CHANGE_AVATAR.getOutput());
+        logoutButton.setText(Output.LOGOUT.getOutput());
+        deleteAccountButton.setText(Output.DELETE_ACCOUNT.getOutput());
+
         avatar.setImage(new Image(user.getAvatarAddress()));
         usernameText.setText(user.getUsername());
     }

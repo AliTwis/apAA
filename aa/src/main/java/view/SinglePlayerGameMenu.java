@@ -157,13 +157,16 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
             ball.setVisible(true);
             ball.getLine().setVisible(true);
         }
-        gameLayout.setStyle("-fx-background-color: 'red';");
+        gameLayout.getStyleClass().remove("game");
+        gameLayout.getStyleClass().add("lose");
         Label label = new Label("You lost!");
         gameLayout.getChildren().add(label);
         generalGameController.lose(Game.getLevel(), user);
     }
 
     public void win() {
+        gameLayout.getStyleClass().remove("game");
+        gameLayout.getStyleClass().add("win");
         GameTransitions.stopTransitions();
         generalGameController.win(Game.getLevel(), user);
         gameLayout.setStyle("-fx-background-color: 'green';");
