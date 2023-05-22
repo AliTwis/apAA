@@ -29,16 +29,12 @@ Button {
     color: #0F1111;
 }
 
-Label {
+Label, RadioButton, ChoiceBox{
     -fx-text-fill: yellow;
 }
 
-RadioButton {
-    -fx-text-fill: yellow;
-}
-
-CheckBox {
-    -fx-text-fill: yellow;
+Text {
+    -fx-fill: yellow;
 }
 
 ChoiceBox {
@@ -67,4 +63,8 @@ TextField, PasswordField {
 .pauseElements {
     -fx-background-image: url("../images/background/background3.png");
     -fx-background-size: cover;
+}
+
+.shapeChoose:hover {
+    -fx-opacity: 0.5;
 }

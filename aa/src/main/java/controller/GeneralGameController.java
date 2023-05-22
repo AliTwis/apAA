@@ -55,6 +55,15 @@ public abstract class GeneralGameController {
         timelines.put("change visibility", timeline);
     }
 
+    protected void changeWindPhase4() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e ->
+                gameMenu.setWindAngle((int) ((new Random().nextInt(60) - 15) * Game.getLevel().getWindPower()))
+        ));
+        timeline.setCycleCount(-1);
+        timeline.play();
+        timelines.put("change wind", timeline);
+    }
+
     protected void changeBallsSize(ActionEvent actionEvent) {
         LinkedList<Ball> balls = gameMenu.getGame().getTargetCircle().getBalls();
         for (Ball ball : balls) {
@@ -143,6 +152,7 @@ public abstract class GeneralGameController {
         if (!Game.isMute()) mediaPlayer.play();
         LinkedList<Ball> balls = player.getBalls();
         Ball firstBall = balls.getFirst();
+        firstBall.setxSpeed((int)(10 * Math.sin(Math.toRadians(gameMenu.getWindAngle()))));
         firstBall.getBallAnimation().play();
         balls.removeFirst();
         if (balls.size() > 0) {
@@ -150,12 +160,6 @@ public abstract class GeneralGameController {
             balls.getFirst().getText().setVisible(true);
         } else {
             gameMenu.win();
-        }
-        if (windActive && balls.size() > 0) {
-            int wind = new Random().nextInt(60) - 30;
-            firstBall = balls.getFirst();
-            firstBall.setxSpeed((int)(10 * Math.sin(Math.toRadians(wind))));
-            SinglePlayerGameMenu.getGameController().setWind(wind);
         }
     }
 

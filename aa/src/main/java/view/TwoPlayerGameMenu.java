@@ -24,6 +24,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     TwoPlayerGame game;
     private boolean paused = false;
     private boolean movable = false;
+    private int windAngle = 0;
     private static TwoPlayerFXController gameController;
 
     public static void setGameController(TwoPlayerFXController gameController) {
@@ -47,6 +48,15 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    @Override
+    public int getWindAngle() {
+        return windAngle;
+    }
+
+    public void setWindAngle(int windAngle) {
+        this.windAngle = windAngle;
     }
 
     public TwoPlayerGame getGame() {

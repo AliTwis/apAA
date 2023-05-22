@@ -26,6 +26,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     SinglePlayerGame game;
     private boolean paused = false;
     private boolean movable = false;
+    private int windAngle = 0;
     private static SinglePlayerFXController gameController;
 
     public SinglePlayerGameMenu(User user) throws IOException {
@@ -40,6 +41,15 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
 
     public static void setGameController(SinglePlayerFXController gameController) {
         SinglePlayerGameMenu.gameController = gameController;
+    }
+
+    public int getWindAngle() {
+        return windAngle;
+    }
+
+    public void setWindAngle(int windAngle) {
+        this.windAngle = windAngle;
+        gameController.setWind(windAngle);
     }
 
     public Pane getGameLayout() {

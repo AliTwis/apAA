@@ -39,15 +39,15 @@
             <Font size="11.0" />
          </font>
       </Button>
-      <Circle fx:id="firstMonster" fill="DODGERBLUE" layoutX="209.0" layoutY="348.0" onMouseClicked="#chooseMonster1" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="secondMonster" fill="DODGERBLUE" layoutX="333.0" layoutY="348.0" onMouseClicked="#chooseMonster2" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="thirdMonster" fill="DODGERBLUE" layoutX="461.0" layoutY="348.0" onMouseClicked="#chooseMonster3" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle styleClass="shapeChoose" fx:id="firstMonster" fill="DODGERBLUE" layoutX="209.0" layoutY="348.0" onMouseClicked="#chooseMonster1" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle styleClass="shapeChoose" fx:id="secondMonster" fill="DODGERBLUE" layoutX="333.0" layoutY="348.0" onMouseClicked="#chooseMonster2" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle styleClass="shapeChoose" fx:id="thirdMonster" fill="DODGERBLUE" layoutX="461.0" layoutY="348.0" onMouseClicked="#chooseMonster3" radius="28.0" stroke="BLACK" strokeType="INSIDE" />
       <Label alignment="CENTER" layoutX="25.0" layoutY="340.0" prefHeight="16.0" prefWidth="118.0" text="monster:" />
       <Label alignment="CENTER" layoutX="25.0" layoutY="434.0" prefHeight="16.0" prefWidth="118.0" text="map:" />
-      <Rectangle fx:id="firstMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="153.0" layoutY="414.0" onMouseClicked="#chooseFirstMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-      <Rectangle fx:id="secondMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="256.0" layoutY="414.0" onMouseClicked="#chooseSecondMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-      <Rectangle fx:id="thirdMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="361.0" layoutY="414.0" onMouseClicked="#chooseThirdMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-      <Rectangle fx:id="fourthMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="461.0" layoutY="414.0" onMouseClicked="#chooseFourthMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
-      <CheckBox fx:id="mute" layoutX="417.0" layoutY="142.0" mnemonicParsing="false" text="mute" />
+      <Rectangle styleClass="shapeChoose" fx:id="firstMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="153.0" layoutY="414.0" onMouseClicked="#chooseFirstMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <Rectangle styleClass="shapeChoose" fx:id="secondMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="256.0" layoutY="414.0" onMouseClicked="#chooseSecondMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <Rectangle styleClass="shapeChoose" fx:id="thirdMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="361.0" layoutY="414.0" onMouseClicked="#chooseThirdMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <Rectangle styleClass="shapeChoose" fx:id="fourthMap" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="56.0" layoutX="461.0" layoutY="414.0" onMouseClicked="#chooseFourthMap" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+      <CheckBox styleClass="shapeChoose" fx:id="mute" layoutX="417.0" layoutY="142.0" mnemonicParsing="false" text="mute" />
    </children>
 </Pane>

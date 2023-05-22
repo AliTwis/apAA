@@ -11,6 +11,8 @@ import model.User;
 public interface GameMenusFunctions {
     void lose();
     void win();
+    int getWindAngle();
+    void setWindAngle(int windAngle);
     Game getGame();
     Stage getGameStage();
 

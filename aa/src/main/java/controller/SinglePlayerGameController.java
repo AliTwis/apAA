@@ -38,9 +38,9 @@ public class SinglePlayerGameController extends GeneralGameController {
         else if (current == initial / 2) {
             changeVisibilityPhase3();
         }
-        else if (current == (initial * 3) / 4) {
+        else if (current ==((initial / 4) * 3)) {
+            changeWindPhase4();
             gameMenu.setMovable(true);
-            windActive = true;
         }
     }
 
@@ -82,12 +82,18 @@ public class SinglePlayerGameController extends GeneralGameController {
 
     public void moveLeftPlayer() {
         Ball ball = gameMenu.getGame().getPlayer().getBalls().getFirst();
-        if (ball.getCenterX() > 20) ball.setCenterX(ball.getCenterX() - 10);
+        if (ball.getCenterX() > 20) {
+            ball.setCenterX(ball.getCenterX() - 10);
+            ball.getText().setX(ball.getCenterX());
+        }
     }
 
     public void moveRightPlayer() {
         Ball ball = gameMenu.getGame().getPlayer().getBalls().getFirst();
-        if (ball.getCenterX() < gameMenu.getGameStage().getWidth() - 20) ball.setCenterX(ball.getCenterX() + 10);
+        if (ball.getCenterX() < gameMenu.getGameStage().getWidth() - 20) {
+            ball.setCenterX(ball.getCenterX() + 10);
+            ball.getText().setX(ball.getCenterX());
+        }
     }
 
     public void lose(Level level, User... users) {
