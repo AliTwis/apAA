@@ -27,6 +27,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     private boolean paused = false;
     private boolean movable = false;
     private boolean savedGame = false;
+    private boolean isFinished = false;
     private int windAngle = 0;
     private static SinglePlayerFXController gameController;
 
@@ -119,9 +120,11 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
             ball.setBallAnimation(new BallAnimation(ball, game.getTargetCircle(), generalGameController));
         }
         scene = new Scene(wholeLayout);
+        gameLayout.requestFocus();
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (isFinished) return;
                 if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
                 } else if (keyEvent.getCode().equals(Game.getGameKeys().get("freeze"))) {
@@ -170,6 +173,8 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     }
 
     public void lose() {
+        isFinished = true;
+//        gameLayout.setDisable(true);
         GameTransitions.stopTransitions();
         for (Ball ball : game.getTargetCircle().getBalls()) {
             ball.setVisible(true);
@@ -181,6 +186,7 @@ public class SinglePlayerGameMenu extends Application implements GameMenusFuncti
     }
 
     public void win() {
+        isFinished = true;
         gameLayout.getStyleClass().remove("game");
         gameLayout.getStyleClass().add("win");
         GameTransitions.stopTransitions();

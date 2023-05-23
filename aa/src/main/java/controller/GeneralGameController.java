@@ -16,6 +16,7 @@ import javafx.util.Duration;
 import model.*;
 import view.*;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Random;
@@ -75,12 +76,14 @@ public abstract class GeneralGameController {
     }
 
     public void changeWindPhase4() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), e ->
-                gameMenu.setWindAngle((int) ((new Random().nextInt(60) - 15) * Game.getLevel().getWindPower()))
-        ));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(1000), this::changeWind));
         timeline.setCycleCount(-1);
         timeline.play();
         timelines.put("change wind", timeline);
+    }
+
+    protected void changeWind(ActionEvent actionEvent) {
+        gameMenu.setWindAngle((int) ((new Random().nextInt(60) - 15) * Game.getLevel().getWindPower()));
     }
 
     protected void changeBallsSize(ActionEvent actionEvent) {
@@ -147,9 +150,10 @@ public abstract class GeneralGameController {
     }
 
     public void stopTimeLines() {
-        for (Timeline timeline : timelines.values()) {
-            timeline.stop();
+        for (String timelineString : timelines.keySet()) {
+            timelines.get(timelineString).stop();
         }
+        timelines.clear();
     }
 
     public void startTimeLines() {
@@ -163,6 +167,9 @@ public abstract class GeneralGameController {
         timeline.setCycleCount(-1);
         timeline.play();
         timelines.put("timer", timeline);
+        timeline.setOnFinished(e -> {
+            System.out.println("timer is finishing");
+        });
     }
 
     private void passTime(ActionEvent actionEvent) {
@@ -279,6 +286,7 @@ public abstract class GeneralGameController {
     }
 
     public void showFinalResult(boolean won, Level level) {
+        gameMenu.setWindAngle(0);
         setupFinalResult();
         Text result = new Text();
         result.setTextAlignment(TextAlignment.CENTER);
@@ -300,7 +308,7 @@ public abstract class GeneralGameController {
         gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
     }
 
-    public void showFinalResult2(int firstUserPoint, int secondUserPoint, String username, String username1) {
+    public void showFinalResult2(int firstUserPoint, int secondUserPoint, String username, String username1) throws Exception {
         setupFinalResult();
         if (gameMenu instanceof SinglePlayerGameMenu) return;
         resultPane.getStylesheets().add(AvatarMenu.class.getResource("/css/game.css").toExternalForm());
@@ -311,8 +319,14 @@ public abstract class GeneralGameController {
 
         Text result = new Text();
         result.setTextAlignment(TextAlignment.CENTER);
-        if (firstUserPoint > secondUserPoint) result.setText(username + " beats " + username1 + "!");
-        else if (secondUserPoint > firstUserPoint) result.setText(username1 + " beats " + username + "!");
+        if (firstUserPoint > secondUserPoint) {
+            result.setText(username + " beats " + username1 + "!");
+            System.out.println(username + " beats " + username1 + "!");
+        }
+        else if (secondUserPoint > firstUserPoint) {
+            result.setText(username1 + " beats " + username + "!");
+            System.out.println(username1 + " beats " + username + "!");
+        }
         else result.setText("Draw");
         result.setLayoutX(62);
         result.setLayoutY(37);
@@ -343,7 +357,8 @@ public abstract class GeneralGameController {
 
         resultPane.getChildren().addAll(result, pointNum, pointNum1);
         resultPane.setFocusTraversable(false);
-        gameMenu.getGameLayout().getChildren().add(resultPane);
+//        gameMenu.getGameLayout().getChildren().add(resultPane);
         gameMenu.getGameLayout().setPrefWidth(gameMenu.getGameLayout().getWidth());
+        new TwoPlayerGameMenu(User.getUserByName(user.getText()), User.getUserByName(user1.getText())).start(LoginMenu.gameStage);
     }
 }

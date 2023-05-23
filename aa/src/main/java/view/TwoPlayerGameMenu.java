@@ -26,6 +26,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     TwoPlayerGame game;
     private boolean paused = false;
     private boolean movable = false;
+    private boolean isFinished = false;
     private int windAngle = 0;
     private static TwoPlayerFXController gameController;
 
@@ -126,6 +127,7 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyEvent) {
+                if (isFinished) return;
                 if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot"))) {
                     generalGameController.shoot(gameLayout, game.getPlayer());
                 } else if (keyEvent.getCode().equals(Game.getGameKeys().get("shoot2"))) {
@@ -163,12 +165,22 @@ public class TwoPlayerGameMenu extends Application implements GameMenusFunctions
     }
 
     public void lose() {
+        isFinished = true;
         GameTransitions.stopTransitions();
         gameLayout.setStyle("-fx-background-color: 'red';");
+        showFinalBalls();
     }
 
     public void win() {
+        isFinished = true;
         GameTransitions.stopTransitions();
+        showFinalBalls();
+    }
 
+    private void showFinalBalls() {
+        for (Ball ball : game.getTargetCircle().getBalls()) {
+            ball.setVisible(true);
+            ball.getLine().setVisible(true);
+        }
     }
 }

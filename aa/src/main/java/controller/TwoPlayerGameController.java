@@ -1,7 +1,12 @@
 package controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 import model.*;
 import view.TwoPlayerGameMenu;
 
@@ -31,16 +36,34 @@ public class TwoPlayerGameController extends GeneralGameController {
         if (gameMenu.getGame().getPlayer().getUser().equals(users[0])) {
             winnerPoint = level.getNumber() * 150 + gameMenu.getGame().getCurrentBall() * 10;
             loserPoint = 7 * gameMenu.getGame().getCurrentBall1();
-            gameMenu.getGeneralGameController().showFinalResult2(winnerPoint, loserPoint, username, username1);
+            showFinalResultCaller(winnerPoint, loserPoint, username, username1);
         } else {
             winnerPoint = level.getNumber() * 150 + gameMenu.getGame().getCurrentBall1() * 10;
             loserPoint = 7 * gameMenu.getGame().getCurrentBall();
-            gameMenu.getGeneralGameController().showFinalResult2(loserPoint, winnerPoint, username, username1);
+            showFinalResultCaller(loserPoint, winnerPoint, username, username1);
         }
         users[0].increaseScore(winnerPoint);
         users[1].increaseScore(loserPoint);
         User.updateUsers();
         stopTimeLines();
+    }
+
+    private void showFinalResultCaller(int firstPoint, int secondPoint, String username, String username1) {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> {
+            gameMenu.getGeneralGameController().timing(e);
+        }));
+        timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    gameMenu.getGeneralGameController().showFinalResult2(firstPoint, secondPoint, username, username1);
+                } catch (Exception e) {
+                    System.out.println("hell");
+                }
+            }
+        });
+
     }
 
     @Override

@@ -1,5 +1,7 @@
 package controller;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,6 +18,7 @@ import java.util.LinkedList;
 
 public class SinglePlayerGameController extends GeneralGameController {
     private static Pane resultPane;
+    private int phase = 1;
     SinglePlayerGameMenu gameMenu;
 
     public SinglePlayerGameController(SinglePlayerGameMenu gameMenu) {
@@ -25,13 +28,15 @@ public class SinglePlayerGameController extends GeneralGameController {
 
     public void checkPhase(int current) {
         int initial = Game.getInitialBallsAmount();
-        if (current == initial / 4) {
+        if (current >= initial / 4 && phase == 1){
+            phase++;
             changeDirectionPhase2();
             changeBallsSizePhase2();
-        } else if (current == initial / 2) {
+        } else if (current >= initial / 2 && phase == 2) {
             changeVisibilityPhase3();
-        } else if (current == ((initial / 4) * 3)) {
-            changeWindPhase4();
+            phase++;
+        } else if (current >= ((initial / 4) * 3) && phase == 3) {
+            phase++;
             changeWindPhase4();
             gameMenu.setMovable(true);
         }
@@ -98,7 +103,16 @@ public class SinglePlayerGameController extends GeneralGameController {
         user.increaseScore(score);
         User.updateUsers();
         stopTimeLines();
-        showFinalResult(false, level);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> {
+            gameMenu.getGeneralGameController().timing(e);
+        }));
+        timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showFinalResult(false, level);
+            }
+        });
     }
 
     public void win(Level level, User... users) {
@@ -107,8 +121,15 @@ public class SinglePlayerGameController extends GeneralGameController {
         user.updateTime();
         User.updateUsers();
         stopTimeLines();
-        showFinalResult(true, level);
+        Timeline timeline = new Timeline(new KeyFrame(Duration.millis(2000), e -> {
+            gameMenu.getGeneralGameController().timing(e);
+        }));
+        timeline.play();
+        timeline.setOnFinished(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                showFinalResult(true, level);
+            }
+        });
     }
-
-
 }

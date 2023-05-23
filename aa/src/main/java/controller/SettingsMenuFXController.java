@@ -67,6 +67,10 @@ public class SettingsMenuFXController implements Initializable {
         setting.setText(Output.SETTING.getOutput());
         english.setSelected(Output.isIsEnglish());
 
+        if (Game.getLevel().equals(Level.ONE)) level1.setSelected(true);
+        else if (Game.getLevel().equals(Level.TWO)) level2.setSelected(true);
+        else level3.setSelected(true);
+
         mute.setSelected(Game.isMute());
         firstMonster.setFill(new ImagePattern(new Image(Game.class.getResource("/images/game/monster1.png").toExternalForm())));
         secondMonster.setFill(new ImagePattern(new Image(Game.class.getResource("/images/game/monster4.png").toExternalForm())));
